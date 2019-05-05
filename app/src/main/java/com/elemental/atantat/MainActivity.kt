@@ -16,7 +16,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
+        setUpViewPager()
 
+
+    }
+    private fun setUpViewPager(){
         val adapter = ViewPagerAdapter(supportFragmentManager)
         adapter.addFragment(HomeFragment(), "Home")
         adapter.addFragment(SubjectFragment(), "Subjects")
@@ -24,7 +28,6 @@ class MainActivity : AppCompatActivity() {
         viewPager.adapter = adapter
 
         tabs.setupWithViewPager(viewPager)
-
     }
 
 
