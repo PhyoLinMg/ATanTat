@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.elemental.atantat.R
-import com.elemental.atantat.viewmodel.HomeViewModel
+import com.elemental.atantat.viewmodel.HomeViewModel.HomeViewModel
 
 class HomeFragment : Fragment() {
 

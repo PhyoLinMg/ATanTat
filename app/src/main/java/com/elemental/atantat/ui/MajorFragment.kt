@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.elemental.atantat.R
-import com.elemental.atantat.viewmodel.MajorViewModel
+import com.elemental.atantat.viewmodel.MajorViewModel.MajorViewModel
 
 class MajorFragment : Fragment() {
 
