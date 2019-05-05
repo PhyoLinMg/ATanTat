@@ -1,4 +1,4 @@
-package com.elemental.atantat.viewmodel
+package com.elemental.atantat.viewmodel.HomeViewModel
 
 import androidx.lifecycle.ViewModel;
 
