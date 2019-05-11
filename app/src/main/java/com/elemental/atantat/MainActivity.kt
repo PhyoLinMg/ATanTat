@@ -18,15 +18,14 @@ class MainActivity : AppCompatActivity() {
 
         setUpViewPager()
 
-
     }
+
     private fun setUpViewPager(){
         val adapter = ViewPagerAdapter(supportFragmentManager)
         adapter.addFragment(HomeFragment(), "Home")
         adapter.addFragment(SubjectFragment(), "Subjects")
         adapter.addFragment(MajorFragment(), "Majors")
         viewPager.adapter = adapter
-
         tabs.setupWithViewPager(viewPager)
     }
 
