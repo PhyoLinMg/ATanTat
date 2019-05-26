@@ -10,9 +10,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 interface MainService {
 
-
-
-
     companion object {
        operator fun invoke(
            connectivityInterceptor: ConnectivityInterceptor

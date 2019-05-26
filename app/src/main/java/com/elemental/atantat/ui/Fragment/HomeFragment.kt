@@ -1,4 +1,4 @@
-package com.elemental.atantat.ui
+package com.elemental.atantat.ui.Fragment
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
