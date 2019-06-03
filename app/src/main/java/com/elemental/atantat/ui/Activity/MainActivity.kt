@@ -1,5 +1,6 @@
 package com.elemental.atantat.ui.Activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -44,19 +45,14 @@ class MainActivity : AppCompatActivity() {
 
     // actions on click menu items
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-
-        R.id.action_search -> {
-
-
-            true
-        }
         R.id.action_profile -> {
-
-
+            var profile = Intent(this@MainActivity, ProfileActivity::class.java)
+            startActivity(profile)
             true
         }
         R.id.action_setting -> {
-
+            var setting=Intent(this@MainActivity, SettingsActivity::class.java)
+            startActivity(setting)
             true
         }
         else -> {
