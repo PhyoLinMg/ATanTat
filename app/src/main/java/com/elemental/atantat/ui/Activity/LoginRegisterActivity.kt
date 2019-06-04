@@ -3,16 +3,16 @@ package com.elemental.atantat.ui.Activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+
 import android.widget.Button
-import android.widget.Toast
+
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 
 import com.elemental.atantat.R
 import com.elemental.atantat.ui.Fragment.LoginFragment
 import com.elemental.atantat.ui.Fragment.RegisterFragment
-import kotlinx.android.synthetic.main.activity_login_register.view.*
+
 
 class LoginRegisterActivity : AppCompatActivity() {
 

@@ -10,15 +10,17 @@ import okhttp3.OkHttpClient
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.POST
+import retrofit2.converter.scalars.ScalarsConverterFactory
+import retrofit2.http.*
 
 interface UserLoginSignUpInterface {
 
+
     @POST("login")
-    fun login(): Deferred<Response<LoginResponse>>
+    fun login(@Body body: String): Deferred<Response<LoginResponse>>
 
     @POST("signup")
-    fun signup(): Deferred<Response<SignUpResponse>>
+    fun signup(@Body body:String): Deferred<Response<SignUpResponse>>
 
 
     companion object {
@@ -44,6 +46,7 @@ interface UserLoginSignUpInterface {
             return Retrofit.Builder()
                 .baseUrl(Const.LOCAL_API_END)
                 .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(ScalarsConverterFactory.create())
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .client(okHttpClient)
                 .build()
