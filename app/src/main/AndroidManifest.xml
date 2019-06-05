@@ -27,7 +27,7 @@
                 android:name=".ui.Activity.ProfileActivity"
                 android:label="@string/title_activity_profile"
                 android:parentActivityName=".ui.Activity.MainActivity"
-                android:theme="@style/AppTheme.NoActionBar">
+                android:theme="@style/Theme.AppCompat.NoActionBar">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="com.elemental.atantat.ui.Activity.MainActivity"/>

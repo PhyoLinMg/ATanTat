@@ -1,7 +1,9 @@
 package com.elemental.atantat.network
 
 import com.elemental.atantat.data.user_panel.LoginResponse
+import com.elemental.atantat.data.user_panel.LoginUser
 import com.elemental.atantat.data.user_panel.SignUpResponse
+import com.elemental.atantat.data.user_panel.SignUpUser
 import com.elemental.atantat.utils.Const
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
@@ -17,10 +19,10 @@ interface UserLoginSignUpInterface {
 
 
     @POST("login")
-    fun login(@Body body: String): Deferred<Response<LoginResponse>>
+    fun login(@Body loginUser: LoginUser): Deferred<Response<LoginResponse>>
 
     @POST("signup")
-    fun signup(@Body body:String): Deferred<Response<SignUpResponse>>
+    fun signup(@Body signUpUser: SignUpUser): Deferred<Response<SignUpResponse>>
 
 
     companion object {
@@ -44,7 +46,7 @@ interface UserLoginSignUpInterface {
                 .build()
 
             return Retrofit.Builder()
-                .baseUrl(Const.LOCAL_API_END)
+                .baseUrl(Const.ONLINE_API_END)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
