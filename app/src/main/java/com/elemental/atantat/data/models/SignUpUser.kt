@@ -1,4 +1,4 @@
-package com.elemental.atantat.data.user_panel
+package com.elemental.atantat.data.models
 
 data class SignUpUser(
     val name:String,

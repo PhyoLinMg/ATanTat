@@ -2,14 +2,13 @@ package com.elemental.atantat.repository.loginRepo
 
 import android.content.Context
 import android.util.Log
-import com.elemental.atantat.data.user_panel.LoginUser
+import com.elemental.atantat.data.models.LoginUser
 import com.elemental.atantat.network.ConnectivityInterceptorImpl
 import com.elemental.atantat.network.UserLoginSignUpInterface
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import org.json.JSONObject
 import kotlin.coroutines.CoroutineContext
 
 class LoginRepositoryImpl(val context: Context) : LoginRepository,CoroutineScope {
@@ -18,7 +17,7 @@ class LoginRepositoryImpl(val context: Context) : LoginRepository,CoroutineScope
         get() = Dispatchers.Default + mJob
     private var api: UserLoginSignUpInterface = UserLoginSignUpInterface.invoke(ConnectivityInterceptorImpl(context))
     override fun login(email:String,password:String) {
-       val loginUser=LoginUser(email,password)
+       val loginUser= LoginUser(email, password)
 
         launch {
             val response=api.login(loginUser).await()

@@ -1,12 +1,9 @@
 package com.elemental.atantat.repository.signupRepo
 
-import android.app.Activity
-import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import androidx.fragment.app.FragmentActivity
-import com.elemental.atantat.data.user_panel.SignUpUser
+import com.elemental.atantat.data.models.SignUpUser
 import com.elemental.atantat.network.ConnectivityInterceptorImpl
 import com.elemental.atantat.network.UserLoginSignUpInterface
 import com.elemental.atantat.ui.Activity.MainActivity
@@ -23,7 +20,7 @@ class SignUpRepositoryImpl(val context: Context) : SignUpRepository, CoroutineSc
         get() = Dispatchers.Default + mJob
     private var api: UserLoginSignUpInterface = UserLoginSignUpInterface.invoke(ConnectivityInterceptorImpl(context))
     override fun signup(name: String, email: String, password: String, password_confirmation: String,activity:FragmentActivity?) {
-        val signUpUser=SignUpUser(name,email,password,password_confirmation)
+        val signUpUser= SignUpUser(name, email, password, password_confirmation)
         launch {
             val response=api.signup(signUpUser).await()
 

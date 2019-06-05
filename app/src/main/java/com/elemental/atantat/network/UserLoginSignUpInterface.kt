@@ -1,9 +1,9 @@
 package com.elemental.atantat.network
 
 import com.elemental.atantat.data.user_panel.LoginResponse
-import com.elemental.atantat.data.user_panel.LoginUser
+import com.elemental.atantat.data.models.LoginUser
 import com.elemental.atantat.data.user_panel.SignUpResponse
-import com.elemental.atantat.data.user_panel.SignUpUser
+import com.elemental.atantat.data.models.SignUpUser
 import com.elemental.atantat.utils.Const
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
