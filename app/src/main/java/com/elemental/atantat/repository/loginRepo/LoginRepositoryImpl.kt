@@ -17,7 +17,7 @@ class LoginRepositoryImpl(val context: Context) : LoginRepository,CoroutineScope
         get() = Dispatchers.Default + mJob
     private var api: UserLoginSignUpInterface = UserLoginSignUpInterface.invoke(ConnectivityInterceptorImpl(context))
     override fun login(email:String,password:String) {
-       val loginUser= LoginUser(email, password)
+       val loginUser= LoginUser(email, password,true)
 
         launch {
             val response=api.login(loginUser).await()

@@ -7,23 +7,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.Toast
+
 import androidx.lifecycle.ViewModelProviders
 
 import com.elemental.atantat.R
-import com.elemental.atantat.repository.loginRepo.LoginRepositoryImpl
-import com.elemental.atantat.repository.signupRepo.SignUpRepository
+
 import com.elemental.atantat.repository.signupRepo.SignUpRepositoryImpl
-import com.elemental.atantat.viewmodel.LoginViewModel.LoginViewModel
-import com.elemental.atantat.viewmodel.LoginViewModel.LoginViewModelFactory
+
 import com.elemental.atantat.viewmodel.SignUpViewModel.SignUpViewModel
 import com.elemental.atantat.viewmodel.SignUpViewModel.SignUpViewModelFactory
-import kotlinx.android.synthetic.main.fragment_login.view.*
-import kotlinx.android.synthetic.main.fragment_login.view.email
-import kotlinx.android.synthetic.main.fragment_login.view.password
+
 import kotlinx.android.synthetic.main.fragment_register.*
 import kotlinx.android.synthetic.main.fragment_register.view.*
+import org.kodein.di.KodeinAware
+import org.kodein.di.generic.instance
+import org.kodein.di.android.x.kodein
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,7 +32,9 @@ private const val ARG_PARAM2 = "param2"
  * A simple [Fragment] subclass.
  *
  */
-class RegisterFragment : Fragment() {
+class RegisterFragment : Fragment(),KodeinAware {
+    override val kodein by kodein()
+    private val viewModelFactory: SignUpViewModelFactory by instance()
 
     private lateinit var viewModel:SignUpViewModel
 
@@ -51,7 +51,7 @@ class RegisterFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
 
-        viewModel = ViewModelProviders.of(this, SignUpViewModelFactory(SignUpRepositoryImpl(context!!))).get(
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(
             SignUpViewModel::class.java)
         view!!.btn_signup.setOnClickListener {
             //Log.d("email",password.text.toString())
