@@ -54,7 +54,6 @@ class RegisterFragment : Fragment(),KodeinAware {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(
             SignUpViewModel::class.java)
         view!!.btn_signup.setOnClickListener {
-            //Log.d("email",password.text.toString())
             viewModel.signup(name.text.toString(),email.text.toString(),password.text.toString(),password_confirmation.text.toString(),activity)
 
         }
