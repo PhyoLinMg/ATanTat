@@ -2,7 +2,7 @@ package com.elemental.atantat.repository.loginRepo
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
+
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import com.elemental.atantat.data.models.LoginUser
