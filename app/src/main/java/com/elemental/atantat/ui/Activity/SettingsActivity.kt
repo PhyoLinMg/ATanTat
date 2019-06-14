@@ -1,7 +1,9 @@
 package com.elemental.atantat.ui.Activity
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity;
 import com.elemental.atantat.R
 import com.elemental.atantat.utils.SharedPreference
@@ -34,6 +36,13 @@ class SettingsActivity : AppCompatActivity() {
         val color=sharedPreference.getValueInt("color")
         switchWidget.isChecked = color==Color.DKGRAY
         layout.setBackgroundColor(color)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this@SettingsActivity, MainActivity::class.java)
+        startActivity(intent)
+
     }
 
 }
