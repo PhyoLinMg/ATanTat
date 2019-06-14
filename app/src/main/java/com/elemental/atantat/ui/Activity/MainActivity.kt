@@ -1,6 +1,7 @@
 package com.elemental.atantat.ui.Activity
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -12,17 +13,23 @@ import com.elemental.atantat.adapter.ViewPagerAdapter
 import com.elemental.atantat.ui.Fragment.HomeFragment
 import com.elemental.atantat.ui.Fragment.MajorFragment
 import com.elemental.atantat.ui.Fragment.SubjectFragment
+import com.elemental.atantat.utils.SharedPreference
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
     var fragment :Fragment?=null
+    private lateinit var sharedPreference:SharedPreference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
+        sharedPreference=SharedPreference(this)
+        val color=sharedPreference.getValueInt("color")
+
+        viewPager.setBackgroundColor(color)
         setUpViewPager()
 
 
@@ -46,12 +53,12 @@ class MainActivity : AppCompatActivity() {
     // actions on click menu items
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.action_profile -> {
-            var profile = Intent(this@MainActivity, ProfileActivity::class.java)
+            val profile = Intent(this@MainActivity, ProfileActivity::class.java)
             startActivity(profile)
             true
         }
         R.id.action_setting -> {
-            var setting=Intent(this@MainActivity, SettingsActivity::class.java)
+            val setting=Intent(this@MainActivity, SettingsActivity::class.java)
             startActivity(setting)
             true
         }

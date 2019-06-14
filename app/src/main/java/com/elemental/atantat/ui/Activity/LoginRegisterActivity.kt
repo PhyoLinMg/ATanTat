@@ -29,12 +29,12 @@ class LoginRegisterActivity : AppCompatActivity() {
             supportFragmentManager.beginTransaction().replace(R.id.ReplaceFrame,fragment).commit()
         }
         btnsignup.setOnClickListener {
-            var signupfragment=RegisterFragment()
+            val signupfragment=RegisterFragment()
             supportFragmentManager.beginTransaction().replace(R.id.ReplaceFrame,signupfragment).commit()
 
         }
         btnlogin.setOnClickListener {
-            var loginfragment=LoginFragment()
+            val loginfragment=LoginFragment()
             supportFragmentManager.beginTransaction().replace(R.id.ReplaceFrame,loginfragment).commit()
 
         }

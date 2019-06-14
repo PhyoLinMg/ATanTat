@@ -7,7 +7,6 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 
-
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -98,10 +97,6 @@ dependencies {
 
     //MDetect
     implementation "myatminsoe.mdetect.android:mdetect-android:$mdetect_version"
-
-
-
-
 
 
 }
