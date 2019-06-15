@@ -17,12 +17,11 @@ import com.elemental.atantat.ui.Fragment.HomeFragment
 import com.elemental.atantat.ui.Fragment.MajorFragment
 import com.elemental.atantat.ui.Fragment.SubjectFragment
 import com.elemental.atantat.utils.SharedPreference
-import com.elemental.atantat.viewmodel.ColorChangerViewModel.ColorChangeViewModel
-import com.elemental.atantat.viewmodel.ColorChangerViewModel.ColorChangeViewModelFactory
+
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity(),LifecycleOwner {
+class MainActivity : AppCompatActivity() {
     var fragment :Fragment?=null
     private lateinit var sharedPreference:SharedPreference
 
@@ -33,36 +32,17 @@ class MainActivity : AppCompatActivity(),LifecycleOwner {
         setSupportActionBar(toolbar)
 
         sharedPreference= SharedPreference(this)
-        val colorChangeViewModel = ViewModelProviders.of(this,ColorChangeViewModelFactory(this)).get(
-            ColorChangeViewModel
-            ::class.java)
-
-        val color=sharedPreference.getValueInt("color")
 
 
-        colorChangeViewModel.colorResource.observe(this,
-            Observer<Int> { t -> viewPager.setBackgroundColor(t!!) })
-
-//        viewPager.setBackgroundColor(color)
-        setUpViewPager()
-        colorChangeViewModel.colorResource.value=color
+        changecolor()
 
 
     }
 
     override fun onResume() {
         super.onResume()
-        val colorChangeViewModel = ViewModelProviders.of(this,ColorChangeViewModelFactory(this)).get(
-            ColorChangeViewModel
-            ::class.java)
-        colorChangeViewModel.colorResource.observe(this,
-            Observer<Int> { t -> viewPager.setBackgroundColor(t!!) })
-        val color=sharedPreference.getValueInt("color")
 
-
-        setUpViewPager()
-        colorChangeViewModel.colorResource.value=color
-
+        changecolor()
     }
     private fun setUpViewPager(){
         val adapter = ViewPagerAdapter(supportFragmentManager)
@@ -72,7 +52,14 @@ class MainActivity : AppCompatActivity(),LifecycleOwner {
         viewPager.adapter = adapter
         tabs.setupWithViewPager(viewPager)
     }
+    private fun changecolor(){
 
+        val color=sharedPreference.getValueInt("color")
+        viewPager.setBackgroundColor(color)
+
+        setUpViewPager()
+
+    }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.main_menu, menu)
