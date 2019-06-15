@@ -38,11 +38,6 @@ class SettingsActivity : AppCompatActivity() {
         layout.setBackgroundColor(color)
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        val intent = Intent(this@SettingsActivity, MainActivity::class.java)
-        startActivity(intent)
 
-    }
 
 }
