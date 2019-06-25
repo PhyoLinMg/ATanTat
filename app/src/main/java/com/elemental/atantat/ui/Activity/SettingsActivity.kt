@@ -23,6 +23,10 @@ class SettingsActivity : AppCompatActivity() {
 
         sharedPreference = SharedPreference(this)
 
+        backgroundChange()
+    }
+
+    private fun backgroundChange(){
         switchWidget.setOnClickListener {
             if (switchWidget.isChecked) {
                 sharedPreference.save("color", Color.DKGRAY)
@@ -43,8 +47,6 @@ class SettingsActivity : AppCompatActivity() {
             switchWidget.isChecked=false
             text.setTextColor(Color.BLACK)
         }
-
-
         layout.setBackgroundColor(color)
     }
 

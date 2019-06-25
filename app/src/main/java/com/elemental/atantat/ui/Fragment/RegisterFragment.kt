@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.elemental.atantat.R
 
 import com.elemental.atantat.repository.signupRepo.SignUpRepositoryImpl
+import com.elemental.atantat.utils.SharedPreference
 
 import com.elemental.atantat.viewmodel.SignUpViewModel.SignUpViewModel
 import com.elemental.atantat.viewmodel.SignUpViewModel.SignUpViewModelFactory
@@ -37,6 +38,7 @@ class RegisterFragment : Fragment(),KodeinAware {
     private val viewModelFactory: SignUpViewModelFactory by instance()
 
     private lateinit var viewModel:SignUpViewModel
+    private lateinit var sharedPreference:SharedPreference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,7 +52,9 @@ class RegisterFragment : Fragment(),KodeinAware {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        sharedPreference= SharedPreference(context)
 
+        layout.setBackgroundColor(sharedPreference.getValueInt("color"))
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(
             SignUpViewModel::class.java)
         view!!.btn_signup.setOnClickListener {

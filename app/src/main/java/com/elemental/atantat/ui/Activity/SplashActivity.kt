@@ -1,20 +1,32 @@
 package com.elemental.atantat.ui.Activity
 
 import android.content.Intent
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.elemental.atantat.R
+import com.elemental.atantat.utils.SharedPreference
 
 class SplashActivity : AppCompatActivity() {
     private var mDelayHandler: Handler? = null
     private val SPLASH_DELAY: Long = 3000 //3 seconds
+    private lateinit var sharedPreferences: SharedPreference
 
     internal val mRunnable: Runnable = Runnable {
+        sharedPreferences= SharedPreference(this)
         if (!isFinishing) {
-            val intent = Intent(applicationContext, MainActivity::class.java)
-            startActivity(intent)
-            finish()
+            if(sharedPreferences.getValueString("token")!=null){
+                val intent = Intent(applicationContext, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+            else{
+                val intent = Intent(applicationContext, LoginRegisterActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+
         }
     }
 

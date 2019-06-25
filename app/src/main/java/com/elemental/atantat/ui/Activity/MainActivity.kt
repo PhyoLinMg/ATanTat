@@ -22,8 +22,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
-    var fragment :Fragment?=null
-    private lateinit var sharedPreference:SharedPreference
+    var fragment: Fragment? = null
+    private lateinit var sharedPreference: SharedPreference
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,20 +31,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        sharedPreference= SharedPreference(this)
-
-
+        sharedPreference = SharedPreference(this)
+        
         changecolor()
-
-
     }
 
     override fun onResume() {
         super.onResume()
-
         changecolor()
     }
-    private fun setUpViewPager(){
+
+    private fun setUpViewPager() {
         val adapter = ViewPagerAdapter(supportFragmentManager)
         adapter.addFragment(HomeFragment(), "Home")
         adapter.addFragment(SubjectFragment(), "Subjects")
@@ -52,14 +49,14 @@ class MainActivity : AppCompatActivity() {
         viewPager.adapter = adapter
         tabs.setupWithViewPager(viewPager)
     }
-    private fun changecolor(){
 
-        val color=sharedPreference.getValueInt("color")
+    private fun changecolor() {
+        val color = sharedPreference.getValueInt("color")
         viewPager.setBackgroundColor(color)
-
         setUpViewPager()
 
     }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.main_menu, menu)
@@ -74,7 +71,7 @@ class MainActivity : AppCompatActivity() {
             true
         }
         R.id.action_setting -> {
-            val setting=Intent(this@MainActivity, SettingsActivity::class.java)
+            val setting = Intent(this@MainActivity, SettingsActivity::class.java)
             startActivity(setting)
             true
         }
@@ -85,9 +82,6 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
-
-
 
 
 }

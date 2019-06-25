@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
 
 import com.elemental.atantat.R
+import com.elemental.atantat.utils.SharedPreference
 
 
 import com.elemental.atantat.viewmodel.LoginViewModel.LoginViewModel
@@ -39,6 +40,7 @@ class LoginFragment : Fragment(),KodeinAware {
     private val viewModelFactory: LoginViewModelFactory by instance()
 
     private lateinit var viewModel:LoginViewModel
+    private lateinit var sharedPreference: SharedPreference
 
 
     override fun onCreateView(
@@ -52,13 +54,16 @@ class LoginFragment : Fragment(),KodeinAware {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        sharedPreference= SharedPreference(context)
 
+        layout.setBackgroundColor(sharedPreference.getValueInt("color"))
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(
             LoginViewModel::class.java)
         view!!.btn_login.setOnClickListener {
 
             //Log.d("email",password.text.toString())
             viewModel.login(email.text.toString(),password.text.toString(),activity)
+
 
         }
     }
