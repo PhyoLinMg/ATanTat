@@ -19,6 +19,7 @@ import com.elemental.atantat.ui.Fragment.SubjectFragment
 import com.elemental.atantat.utils.SharedPreference
 
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.share
 
 
 class MainActivity : AppCompatActivity() {
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         sharedPreference = SharedPreference(this)
-        
+        Log.d("token",sharedPreference.getValueString("token"))
         changecolor()
     }
 
