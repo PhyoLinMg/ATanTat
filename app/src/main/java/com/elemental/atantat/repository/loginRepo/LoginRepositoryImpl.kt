@@ -26,7 +26,7 @@ class LoginRepositoryImpl(val context: Context) : LoginRepository,CoroutineScope
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Default + mJob
     private val dataLoadState: MutableLiveData<DataLoadState> = MutableLiveData()
-    val sharedPreference:SharedPreference= SharedPreference(context)
+    private val sharedPreference:SharedPreference= SharedPreference(context)
     private var api: UserLoginSignUpInterface = UserLoginSignUpInterface.invoke(ConnectivityInterceptorImpl(context))
     override fun login(email:String,password:String,activity: FragmentActivity?) {
        val loginUser= LoginUser(email, password,true)
