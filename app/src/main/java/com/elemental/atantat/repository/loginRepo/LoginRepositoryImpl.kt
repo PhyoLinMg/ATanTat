@@ -2,6 +2,7 @@ package com.elemental.atantat.repository.loginRepo
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
@@ -9,6 +10,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.elemental.atantat.data.models.LoginUser
 import com.elemental.atantat.network.ConnectivityInterceptorImpl
+import com.elemental.atantat.network.NoConnectivityException
 import com.elemental.atantat.network.UserLoginSignUpInterface
 import com.elemental.atantat.ui.Activity.MainActivity
 import com.elemental.atantat.utils.DataLoadState
@@ -33,24 +35,30 @@ class LoginRepositoryImpl(val context: Context) : LoginRepository,CoroutineScope
         dataLoadState.postValue(DataLoadState.LOADING)
         launch {
             val response=api.login(loginUser).await()
-            when{
-                response.isSuccessful->{
+            try{
+                when{
+                    response.isSuccessful->{
 
-                    sharedPreference.save("token",response.body()!!.accessToken)
+                        sharedPreference.save("token",response.body()!!.accessToken)
 
-                    if (sharedPreference.getValueString("token")!=null) {
-                        dataLoadState.postValue(DataLoadState.LOADED)
-                        val intent = Intent (context, MainActivity::class.java)
-                        context.startActivity(intent)
-                        activity?.finish()
+                        if (sharedPreference.getValueString("token")!=null) {
+                            dataLoadState.postValue(DataLoadState.LOADED)
+                            val intent = Intent (context, MainActivity::class.java)
+                            context.startActivity(intent)
+                            activity?.finish()
+                        }
+                        else{
+                            Toast.makeText(context,"Error",Toast.LENGTH_SHORT).show()
+                        }
+
                     }
-                    else{
-                        Toast.makeText(context,"Error",Toast.LENGTH_SHORT).show()
-                    }
-
                 }
-
-
+            }catch (e: NoConnectivityException) {
+                Log.e("MY_ERROR", "No Internet Connection")
+                dataLoadState.postValue(DataLoadState.FAILED)
+            } catch (e: Throwable) {
+                Log.e("MY_ERROR", "I don't know! $e")
+                dataLoadState.postValue(DataLoadState.FAILED)
             }
         }
 

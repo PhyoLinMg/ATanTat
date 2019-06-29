@@ -85,5 +85,10 @@ class RegisterFragment : Fragment(),KodeinAware {
         })
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.cancelJob()
+    }
+
 
 }

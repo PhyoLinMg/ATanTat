@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         sharedPreference = SharedPreference(this)
-        Log.d("token",sharedPreference.getValueString("token"))
+
         changecolor()
     }
 

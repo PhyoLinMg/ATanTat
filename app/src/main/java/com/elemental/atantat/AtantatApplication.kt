@@ -7,8 +7,11 @@ import com.elemental.atantat.network.MainService
 import com.elemental.atantat.network.UserLoginSignUpInterface
 import com.elemental.atantat.repository.loginRepo.LoginRepository
 import com.elemental.atantat.repository.loginRepo.LoginRepositoryImpl
+import com.elemental.atantat.repository.periodRepo.PeriodRepository
+import com.elemental.atantat.repository.periodRepo.PeriodRepositoryImpl
 import com.elemental.atantat.repository.signupRepo.SignUpRepository
 import com.elemental.atantat.repository.signupRepo.SignUpRepositoryImpl
+import com.elemental.atantat.viewmodel.HomeViewModel.HomeViewModelFactory
 import com.elemental.atantat.viewmodel.LoginViewModel.LoginViewModelFactory
 import com.elemental.atantat.viewmodel.SignUpViewModel.SignUpViewModelFactory
 import me.myatminsoe.mdetect.MDetect
@@ -26,10 +29,14 @@ class AtantatApplication: Application(),KodeinAware {
         import(androidXModule(this@AtantatApplication))
 
 
-        bind() from singleton { MainService(instance()) }
+
         bind() from singleton {UserLoginSignUpInterface(instance())}
         bind<ConnectivityInterceptor>() with singleton {
             ConnectivityInterceptorImpl(instance()) }
+
+        bind() from singleton { MainService(instance(),instance()) }
+        bind() from provider { HomeViewModelFactory(instance()) }
+        bind<PeriodRepository>() with singleton { PeriodRepositoryImpl(instance()) }
 
         bind() from provider { LoginViewModelFactory(instance()) }
         bind() from provider {SignUpViewModelFactory(instance())}

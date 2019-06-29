@@ -89,6 +89,10 @@ class LoginFragment : Fragment(),KodeinAware {
         })
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.cancelJob()
+    }
 
 
 }
