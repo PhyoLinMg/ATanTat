@@ -1,9 +1,14 @@
 package com.elemental.atantat.data.models
 
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "periods")
 data class Period(
+    @PrimaryKey(autoGenerate = true)
+    val id:Int,
     @SerializedName("end_time")
     val endTime: String,
     @SerializedName("major_id")

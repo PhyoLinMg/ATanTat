@@ -98,5 +98,9 @@ dependencies {
     //MDetect
     implementation "myatminsoe.mdetect.android:mdetect-android:$mdetect_version"
 
+    //Stetho
+    //It is for only development
+    implementation 'com.facebook.stetho:stetho:1.5.1'
+
 
 }

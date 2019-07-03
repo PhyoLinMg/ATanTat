@@ -38,7 +38,6 @@ class LoginRepositoryImpl(val context: Context) : LoginRepository,CoroutineScope
             try{
                 when{
                     response.isSuccessful->{
-
                         sharedPreference.save("token",response.body()!!.accessToken)
 
                         if (sharedPreference.getValueString("token")!=null) {

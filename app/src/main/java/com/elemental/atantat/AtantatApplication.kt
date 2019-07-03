@@ -14,6 +14,7 @@ import com.elemental.atantat.repository.signupRepo.SignUpRepositoryImpl
 import com.elemental.atantat.viewmodel.HomeViewModel.HomeViewModelFactory
 import com.elemental.atantat.viewmodel.LoginViewModel.LoginViewModelFactory
 import com.elemental.atantat.viewmodel.SignUpViewModel.SignUpViewModelFactory
+import com.facebook.stetho.Stetho
 import me.myatminsoe.mdetect.MDetect
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -27,7 +28,6 @@ class AtantatApplication: Application(),KodeinAware {
 
     override val kodein = Kodein.lazy {
         import(androidXModule(this@AtantatApplication))
-
 
 
         bind() from singleton {UserLoginSignUpInterface(instance())}
@@ -49,6 +49,7 @@ class AtantatApplication: Application(),KodeinAware {
     override fun onCreate() {
         super.onCreate()
         MDetect.init(this)
+        Stetho.initializeWithDefaults(this)
 
     }
 }

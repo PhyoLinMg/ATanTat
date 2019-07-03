@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.elemental.atantat.data.models.Period
+import com.elemental.atantat.db.AtanTatDatabase
 import com.elemental.atantat.network.ConnectivityInterceptorImpl
 import com.elemental.atantat.network.MainService
 import com.elemental.atantat.network.NoConnectivityException
@@ -24,49 +25,38 @@ class PeriodRepositoryImpl(val context:Context) : PeriodRepository, CoroutineSco
         get() = Dispatchers.Default + mJob
 
     private val api:MainService= MainService.invoke(ConnectivityInterceptorImpl(context),sharedPreference.getValueString("token")!!)
-
+    private val db:AtanTatDatabase= AtanTatDatabase.invoke(context)
 
     override fun loadPeriod(){
+        /*
+         first time load so a kone htae htr
+        internet open tine server nat data tuu ma tuu pyn kyie
+        roll call update ka offline so tot online pyn tin ya ml
+        web mr post method nat send ya ml
+
+        */
 
         dataLoadState.postValue(DataLoadState.LOADING)
         launch {
+
             try {
                 val response=api.getPeriodsAsync().await()
-                Log.d("api",response.body()!!.periods.toString())
+                db.PeriodDao().insert(response.body()!!.periods)
                 when {
                     response.isSuccessful ->  {
-                        periods.postValue(response.body()!!.periods)
+                        periods.postValue(db.PeriodDao().periods())
                         dataLoadState.postValue(DataLoadState.LOADED)
                         Log.d("period",periods.toString())
                     }
                 }
             } catch (e: NoConnectivityException) {
-                Log.e("MY_ERROR", "No Internet Connection")
+                Log.e("MY_ERROR", "No Internet Connection But You can use offline")
                 dataLoadState.postValue(DataLoadState.FAILED)
             } catch (e: Throwable) {
                 Log.e("MY_ERROR", "I don't know! $e")
                 dataLoadState.postValue(DataLoadState.FAILED)
             }
         }
-//        launch {
-//            val response=api.getPeriodsAsync().await()
-//            try {
-//                when{
-//                    response.isSuccessful->{
-//                        dataLoadState.postValue(DataLoadState.LOADED)
-//
-//                        Log.d("period",response.toString())
-//                    }
-//
-//                }
-//            }catch (e: NoConnectivityException) {
-//                Log.e("MY_ERROR", "No Internet Connection")
-//                dataLoadState.postValue(DataLoadState.FAILED)
-//            } catch (e: Throwable) {
-//                Log.e("MY_ERROR", "I don't know! $e")
-//                dataLoadState.postValue(DataLoadState.FAILED)
-//            }
-//        }
 
     }
     override fun getPeriod(): LiveData<List<Period>> {
