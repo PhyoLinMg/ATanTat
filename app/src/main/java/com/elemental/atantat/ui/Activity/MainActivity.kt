@@ -3,13 +3,10 @@ package com.elemental.atantat.ui.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+
 import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 
 import com.elemental.atantat.R
 import com.elemental.atantat.adapter.ViewPagerAdapter
@@ -19,12 +16,16 @@ import com.elemental.atantat.ui.Fragment.SubjectFragment
 import com.elemental.atantat.utils.SharedPreference
 
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.share
+import android.content.BroadcastReceiver
+import android.content.IntentFilter
+import android.net.ConnectivityManager
+import com.elemental.atantat.utils.broadcastReceiver.InternetReceiver
 
 
 class MainActivity : AppCompatActivity() {
     var fragment: Fragment? = null
     private lateinit var sharedPreference: SharedPreference
+    private lateinit var MyReceiver: BroadcastReceiver
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,8 +34,13 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         sharedPreference = SharedPreference(this)
-
+        MyReceiver= InternetReceiver()
         changecolor()
+        broadcastIntent()
+    }
+
+    private fun broadcastIntent() {
+        registerReceiver(MyReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
     }
 
     override fun onResume() {
