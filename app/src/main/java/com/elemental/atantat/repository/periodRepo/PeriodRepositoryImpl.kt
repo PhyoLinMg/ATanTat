@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import com.elemental.atantat.data.models.Period
 import com.elemental.atantat.db.AtanTatDatabase
 import com.elemental.atantat.network.ConnectivityInterceptorImpl
-import com.elemental.atantat.network.MainService
+import com.elemental.atantat.network.services.MainService
 import com.elemental.atantat.network.NoConnectivityException
 import com.elemental.atantat.utils.DataLoadState
 import com.elemental.atantat.utils.SharedPreference
@@ -24,7 +24,7 @@ class PeriodRepositoryImpl(val context:Context) : PeriodRepository, CoroutineSco
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Default + mJob
 
-    private val api:MainService= MainService.invoke(ConnectivityInterceptorImpl(context),sharedPreference.getValueString("token")!!)
+    private val api: MainService = MainService.invoke(ConnectivityInterceptorImpl(context),sharedPreference.getValueString("token")!!)
     private val db:AtanTatDatabase= AtanTatDatabase.invoke(context)
 
     override fun loadPeriod(){
@@ -41,7 +41,9 @@ class PeriodRepositoryImpl(val context:Context) : PeriodRepository, CoroutineSco
 
             try {
                 val response=api.getPeriodsAsync().await()
-                db.PeriodDao().insert(response.body()!!.periods)
+                if(db.PeriodDao().periods().count()==0){
+                    db.PeriodDao().insert(response.body()!!.periods)
+                }
                 when {
                     response.isSuccessful ->  {
                         periods.postValue(db.PeriodDao().periods())

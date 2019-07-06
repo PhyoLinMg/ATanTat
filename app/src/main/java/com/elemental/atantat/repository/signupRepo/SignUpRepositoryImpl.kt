@@ -9,7 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import com.elemental.atantat.data.models.SignUpUser
 import com.elemental.atantat.network.ConnectivityInterceptorImpl
 import com.elemental.atantat.network.NoConnectivityException
-import com.elemental.atantat.network.UserLoginSignUpInterface
+import com.elemental.atantat.network.services.UserLoginSignUpInterface
 import com.elemental.atantat.ui.Activity.MainActivity
 import com.elemental.atantat.utils.DataLoadState
 import com.elemental.atantat.utils.SharedPreference

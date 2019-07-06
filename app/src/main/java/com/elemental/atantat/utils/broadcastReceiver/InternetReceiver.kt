@@ -8,11 +8,12 @@ import com.elemental.atantat.utils.NetworkUtil
 
 class InternetReceiver: BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
-        val networkUtil:NetworkUtil= NetworkUtil()
+        val networkUtil= NetworkUtil()
         var status:String?=networkUtil.getConnectivityStatusString(context!!)
         if(status!!.isEmpty()){
             status="No Internet Connection"
         }
+
         Toast.makeText(context,status,Toast.LENGTH_LONG).show()
     }
 }

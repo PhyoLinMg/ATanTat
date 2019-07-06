@@ -3,8 +3,8 @@ package com.elemental.atantat
 import android.app.Application
 import com.elemental.atantat.network.ConnectivityInterceptor
 import com.elemental.atantat.network.ConnectivityInterceptorImpl
-import com.elemental.atantat.network.MainService
-import com.elemental.atantat.network.UserLoginSignUpInterface
+import com.elemental.atantat.network.services.MainService
+import com.elemental.atantat.network.services.UserLoginSignUpInterface
 import com.elemental.atantat.repository.loginRepo.LoginRepository
 import com.elemental.atantat.repository.loginRepo.LoginRepositoryImpl
 import com.elemental.atantat.repository.periodRepo.PeriodRepository
@@ -30,11 +30,11 @@ class AtantatApplication: Application(),KodeinAware {
         import(androidXModule(this@AtantatApplication))
 
 
-        bind() from singleton {UserLoginSignUpInterface(instance())}
+        bind() from singleton { UserLoginSignUpInterface(instance()) }
         bind<ConnectivityInterceptor>() with singleton {
             ConnectivityInterceptorImpl(instance()) }
 
-        bind() from singleton { MainService(instance(),instance()) }
+        bind() from singleton { MainService(instance(), instance()) }
         bind() from provider { HomeViewModelFactory(instance()) }
         bind<PeriodRepository>() with singleton { PeriodRepositoryImpl(instance()) }
 
