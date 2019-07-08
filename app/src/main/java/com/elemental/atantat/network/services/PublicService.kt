@@ -15,10 +15,10 @@ import retrofit2.http.GET
 interface PublicService {
 
     @GET("universities")
-    fun getUniversities():Deferred<Response<Universities>>
+    fun getUniversitiesAsync():Deferred<Response<Universities>>
 
     @GET("majors")
-    fun getMajors():Deferred<Response<Majors>>
+    fun getMajorsAsync():Deferred<Response<Majors>>
 
     companion object {
         operator fun invoke(
@@ -27,7 +27,6 @@ interface PublicService {
 
 
             val okHttpClient = OkHttpClient.Builder()
-
                 .addInterceptor(connectivityInterceptor)
                 .build()
 

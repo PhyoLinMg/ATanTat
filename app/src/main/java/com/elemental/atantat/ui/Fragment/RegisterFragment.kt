@@ -64,7 +64,7 @@ class RegisterFragment : Fragment(),KodeinAware {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(
             SignUpViewModel::class.java)
         view!!.btn_signup.setOnClickListener {
-            viewModel.signup(name.text.toString(),email.text.toString(),password.text.toString(),password_confirmation.text.toString(),activity)
+            viewModel.signup(name.text.toString(),email.text.toString(),password.text.toString(),password_confirmation.text.toString(),1,1,activity)
         }
         viewModel.getLoadState().observe(this, Observer {
             when(it) {
@@ -78,7 +78,7 @@ class RegisterFragment : Fragment(),KodeinAware {
                     determinateBar.visibility = View.VISIBLE
                     Snackbar.make(myView, "No Internet Connection", Snackbar.LENGTH_INDEFINITE)
                         .setAction("RETRY") {
-                            viewModel.signup(name.text.toString(),email.text.toString(),password.text.toString(),password_confirmation.text.toString(),activity)
+                            viewModel.signup(name.text.toString(),email.text.toString(),password.text.toString(),password_confirmation.text.toString(),1,1,activity)
                         }.show()
                 }
             }

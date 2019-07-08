@@ -9,8 +9,8 @@ import com.elemental.atantat.utils.DataLoadState
 class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
     // TODO: Implement the ViewModel
 
-    fun login(email:String,password:String,activity: FragmentActivity?){
-        loginRepository.login(email,password,activity)
+    fun login(email:String,password:String,uni_id:Int,major_id:Int,activity: FragmentActivity?){
+        loginRepository.login(email,password,uni_id,major_id,activity)
     }
 
     fun getLoadState(): LiveData<DataLoadState> {

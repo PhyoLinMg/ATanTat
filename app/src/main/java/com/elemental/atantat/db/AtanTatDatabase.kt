@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.elemental.atantat.data.models.Period
+import com.elemental.atantat.db.dao.PeriodDao
 
 
 @Database(
@@ -14,7 +15,8 @@ import com.elemental.atantat.data.models.Period
     exportSchema = false
 )
 abstract class AtanTatDatabase:RoomDatabase() {
-    abstract fun PeriodDao():PeriodDao
+    abstract fun PeriodDao(): PeriodDao
+
 
     companion object {
         @Volatile private var instance: AtanTatDatabase? = null

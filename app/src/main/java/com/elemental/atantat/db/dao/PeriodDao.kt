@@ -1,4 +1,4 @@
-package com.elemental.atantat.db
+package com.elemental.atantat.db.dao
 
 import androidx.room.*
 import com.elemental.atantat.data.models.Period

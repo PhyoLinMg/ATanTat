@@ -29,9 +29,8 @@ class SignUpRepositoryImpl(val context: Context) : SignUpRepository, CoroutineSc
     private var api: UserLoginSignUpInterface = UserLoginSignUpInterface.invoke(ConnectivityInterceptorImpl(context))
 
 
-
-    override fun signup(name: String, email: String, password: String, password_confirmation: String,activity:FragmentActivity?) {
-        val signUpUser= SignUpUser(name, email, password, password_confirmation)
+    override fun signup(name: String, email: String, password: String, password_confirmation: String,uni_id:Int,major_id:Int,activity:FragmentActivity?) {
+        val signUpUser= SignUpUser(name, email, password, password_confirmation,uni_id,major_id)
         dataLoadState.postValue(DataLoadState.LOADING)
         launch {
             val response=api.signup(signUpUser).await()

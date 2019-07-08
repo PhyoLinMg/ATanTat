@@ -6,7 +6,7 @@ import com.elemental.atantat.utils.DataLoadState
 
 interface LoginRepository {
 
-     fun login(email:String,password:String,activity: FragmentActivity?)
+     fun login(email:String,password:String,uni_id:Int,major_id:Int,activity: FragmentActivity?)
     fun getDataLoadState(): LiveData<DataLoadState>
     fun cancelJob()
 

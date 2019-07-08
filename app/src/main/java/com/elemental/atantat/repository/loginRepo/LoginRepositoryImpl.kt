@@ -30,8 +30,8 @@ class LoginRepositoryImpl(val context: Context) : LoginRepository,CoroutineScope
     private val dataLoadState: MutableLiveData<DataLoadState> = MutableLiveData()
     private val sharedPreference:SharedPreference= SharedPreference(context)
     private var api: UserLoginSignUpInterface = UserLoginSignUpInterface.invoke(ConnectivityInterceptorImpl(context))
-    override fun login(email:String,password:String,activity: FragmentActivity?) {
-       val loginUser= LoginUser(email, password,true)
+    override fun login(email:String,password:String,uni_id:Int,major_id:Int,activity: FragmentActivity?) {
+       val loginUser= LoginUser(email,password,true,uni_id,major_id)
         dataLoadState.postValue(DataLoadState.LOADING)
         launch {
             val response=api.login(loginUser).await()
@@ -39,7 +39,6 @@ class LoginRepositoryImpl(val context: Context) : LoginRepository,CoroutineScope
                 when{
                     response.isSuccessful->{
                         sharedPreference.save("token",response.body()!!.accessToken)
-
                         if (sharedPreference.getValueString("token")!=null) {
                             dataLoadState.postValue(DataLoadState.LOADED)
                             val intent = Intent (context, MainActivity::class.java)
