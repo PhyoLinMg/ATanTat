@@ -9,5 +9,7 @@ data class LoginResponse(
     @SerializedName("expires_at")
     val expiresAt: String,
     @SerializedName("token_type")
-    val tokenType: String
+    val tokenType: String,
+    @SerializedName("message")
+    val message:String
 )

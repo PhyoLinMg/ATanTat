@@ -38,17 +38,18 @@ class PeriodRepositoryImpl(val context:Context) : PeriodRepository, CoroutineSco
 
         dataLoadState.postValue(DataLoadState.LOADING)
         launch {
-
             try {
                 val response=api.getPeriodsAsync().await()
-                if(db.PeriodDao().periods().count()==0){
-                    db.PeriodDao().insert(response.body()!!.periods)
-                }
                 when {
                     response.isSuccessful ->  {
-                        periods.postValue(db.PeriodDao().periods())
-                        dataLoadState.postValue(DataLoadState.LOADED)
-                        Log.d("period",periods.toString())
+                        if(db.PeriodDao().periods().count()==0){
+                            db.PeriodDao().insert(response.body()!!.periods)
+                            load()
+                        }
+                        else {
+                            load()
+                            Log.d("period", periods.toString())
+                        }
                     }
                 }
             } catch (e: NoConnectivityException) {
@@ -70,5 +71,9 @@ class PeriodRepositoryImpl(val context:Context) : PeriodRepository, CoroutineSco
     }
     override fun getDataLoadState(): LiveData<DataLoadState> {
         return dataLoadState
+    }
+    fun load(){
+        periods.postValue(db.PeriodDao().periods())
+        dataLoadState.postValue(DataLoadState.LOADED)
     }
 }

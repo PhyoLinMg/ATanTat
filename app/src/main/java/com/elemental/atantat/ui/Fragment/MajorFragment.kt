@@ -9,9 +9,14 @@ import android.view.ViewGroup
 
 import com.elemental.atantat.R
 import com.elemental.atantat.viewmodel.MajorViewModel.MajorViewModel
+import com.elemental.atantat.viewmodel.MajorViewModel.MajorViewModelFactory
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.kodein
+import org.kodein.di.generic.instance
 
-class MajorFragment : Fragment() {
-
+class MajorFragment : Fragment(), KodeinAware {
+    override val kodein by kodein()
+    private val majorViewModelFactory: MajorViewModelFactory by instance()
     companion object {
         fun newInstance() = MajorFragment()
     }
@@ -27,7 +32,7 @@ class MajorFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MajorViewModel::class.java)
+        viewModel = ViewModelProviders.of(this,majorViewModelFactory).get(MajorViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

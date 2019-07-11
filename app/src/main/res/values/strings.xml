@@ -8,4 +8,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_settings">Setting</string>
+
+    <string name="nointernet">No Internet Connection</string>
+    <string name="loginfailure">UserName or Password is wrong.Please try again</string>
 </resources>

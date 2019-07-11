@@ -35,19 +35,23 @@ class LoginRepositoryImpl(val context: Context) : LoginRepository,CoroutineScope
         dataLoadState.postValue(DataLoadState.LOADING)
         launch {
             val response=api.login(loginUser).await()
+            Log.d("message",response.body().toString())
+            Log.d("uni_id",uni_id.toString())
+            if (response.body() == null)
+                dataLoadState.postValue(DataLoadState.FAILURE)
             try{
                 when{
-                    response.isSuccessful->{
-                        sharedPreference.save("token",response.body()!!.accessToken)
-                        if (sharedPreference.getValueString("token")!=null) {
-                            dataLoadState.postValue(DataLoadState.LOADED)
-                            val intent = Intent (context, MainActivity::class.java)
-                            context.startActivity(intent)
-                            activity?.finish()
-                        }
-                        else{
-                            Toast.makeText(context,"Error",Toast.LENGTH_SHORT).show()
-                        }
+                    response.isSuccessful-> {
+                            sharedPreference.save("token", response.body()!!.accessToken)
+                            if (sharedPreference.getValueString("token") != null) {
+                                dataLoadState.postValue(DataLoadState.SUCCESS)
+                                val intent = Intent(context, MainActivity::class.java)
+                                context.startActivity(intent)
+                                activity?.finish()
+                            } else {
+                                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+                            }
+
 
                     }
                 }

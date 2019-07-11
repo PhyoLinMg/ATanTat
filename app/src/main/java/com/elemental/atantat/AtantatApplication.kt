@@ -8,6 +8,8 @@ import com.elemental.atantat.network.services.PublicService
 import com.elemental.atantat.network.services.UserLoginSignUpInterface
 import com.elemental.atantat.repository.loginRepo.LoginRepository
 import com.elemental.atantat.repository.loginRepo.LoginRepositoryImpl
+import com.elemental.atantat.repository.majorRepo.MajorRepository
+import com.elemental.atantat.repository.majorRepo.MajorRepositoryImpl
 import com.elemental.atantat.repository.periodRepo.PeriodRepository
 import com.elemental.atantat.repository.periodRepo.PeriodRepositoryImpl
 import com.elemental.atantat.repository.signupRepo.SignUpRepository
@@ -16,6 +18,7 @@ import com.elemental.atantat.repository.universityRepo.UniversityRepository
 import com.elemental.atantat.repository.universityRepo.UniversityRepositoryImpl
 import com.elemental.atantat.viewmodel.HomeViewModel.HomeViewModelFactory
 import com.elemental.atantat.viewmodel.LoginViewModel.LoginViewModelFactory
+import com.elemental.atantat.viewmodel.MajorViewModel.MajorViewModelFactory
 import com.elemental.atantat.viewmodel.SignUpViewModel.SignUpViewModelFactory
 import com.elemental.atantat.viewmodel.UniversityViewModel.UniversityViewModelFactory
 import com.facebook.stetho.Stetho
@@ -44,12 +47,13 @@ class AtantatApplication: Application(),KodeinAware {
         bind() from provider { LoginViewModelFactory(instance()) }
         bind() from provider {SignUpViewModelFactory(instance())}
         bind() from provider{ UniversityViewModelFactory(instance()) }
+        bind() from provider{MajorViewModelFactory(instance())}
 
         bind<LoginRepository>() with singleton { LoginRepositoryImpl(instance())}
         bind<SignUpRepository>() with singleton{ SignUpRepositoryImpl(instance()) }
         bind<PeriodRepository>() with singleton { PeriodRepositoryImpl(instance()) }
         bind<UniversityRepository>() with singleton { UniversityRepositoryImpl(instance()) }
-
+        bind<MajorRepository>() with singleton { MajorRepositoryImpl(instance()) }
     }
     override fun onCreate() {
         super.onCreate()

@@ -1,11 +1,13 @@
 package com.elemental.atantat.data.models
 
 
-import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
-@Entity(tableName = "majors")
+
 data class Major(
+    @SerializedName("id")
     val id: Int,
+    @SerializedName("name")
     val name: String,
+    @SerializedName("year")
     val year: Int
 )

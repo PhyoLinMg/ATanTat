@@ -10,16 +10,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.ListAdapter
+import android.widget.Toast
+import androidx.lifecycle.MutableLiveData
+
 import androidx.lifecycle.Observer
+
 
 import androidx.lifecycle.ViewModelProviders
 
 import com.elemental.atantat.R
+import com.elemental.atantat.data.models.Major
 import com.elemental.atantat.data.models.University
-import com.elemental.atantat.repository.signupRepo.SignUpRepository
-import com.elemental.atantat.repository.signupRepo.SignUpRepositoryImpl
-import com.elemental.atantat.repository.universityRepo.UniversityRepositoryImpl
 import com.elemental.atantat.utils.DataLoadState
 import com.elemental.atantat.utils.SharedPreference
 
@@ -27,8 +28,7 @@ import com.elemental.atantat.utils.SharedPreference
 import com.elemental.atantat.viewmodel.LoginViewModel.LoginViewModel
 import com.elemental.atantat.viewmodel.LoginViewModel.LoginViewModelFactory
 import com.elemental.atantat.viewmodel.MajorViewModel.MajorViewModel
-import com.elemental.atantat.viewmodel.SignUpViewModel.SignUpViewModel
-import com.elemental.atantat.viewmodel.SignUpViewModel.SignUpViewModelFactory
+import com.elemental.atantat.viewmodel.MajorViewModel.MajorViewModelFactory
 import com.elemental.atantat.viewmodel.UniversityViewModel.UniversityViewModel
 import com.elemental.atantat.viewmodel.UniversityViewModel.UniversityViewModelFactory
 import com.google.android.material.snackbar.Snackbar
@@ -38,7 +38,7 @@ import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
 
 import kotlinx.android.synthetic.main.fragment_register.email
-import kotlinx.android.synthetic.main.fragment_register.layout
+
 import kotlinx.android.synthetic.main.fragment_register.password
 
 import org.kodein.di.KodeinAware
@@ -54,17 +54,25 @@ private const val ARG_PARAM2 = "param2"
  * A simple [Fragment] subclass.
  *
  */
-class LoginFragment : Fragment(),KodeinAware,AdapterView.OnItemSelectedListener {
+class LoginFragment : Fragment(),KodeinAware {
 
 
     override val kodein by kodein()
     private val loginviewModelFactory: LoginViewModelFactory by instance()
     private val universityViewModelFactory:UniversityViewModelFactory by instance()
+    private val majorViewModelFactory:MajorViewModelFactory by instance()
     private lateinit var myView: View
     private lateinit var loginViewModel:LoginViewModel
     private lateinit var universityViewModel:UniversityViewModel
+    private lateinit var majorViewModel:MajorViewModel
     private lateinit var sharedPreference: SharedPreference
     private val universities: MutableList<University> = ArrayList()
+    private val majors:MutableList<Major> = ArrayList()
+
+    private val uniID:MutableLiveData<Int> = MutableLiveData()
+    private val majorID:MutableLiveData<Int> = MutableLiveData()
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -79,35 +87,69 @@ class LoginFragment : Fragment(),KodeinAware,AdapterView.OnItemSelectedListener 
         super.onActivityCreated(savedInstanceState)
         sharedPreference= SharedPreference(context)
         determinateBar.visibility = View.INVISIBLE
-        uni!!.onItemSelectedListener = this
 
         loginViewModel = ViewModelProviders.of(this, loginviewModelFactory).get(
             LoginViewModel::class.java)
         universityViewModel=ViewModelProviders.of(this,universityViewModelFactory)
             .get(UniversityViewModel::class.java)
+        majorViewModel=ViewModelProviders.of(this,majorViewModelFactory)
+            .get(MajorViewModel::class.java)
+
 
         universityViewModel.loadUniversities()
 
+        majorViewModel.loadMajors()
+
         universityViewModel.getUniversities().observe(this, Observer {
             universities.addAll(it)
-            val array= arrayOfNulls<String>(universities.size)
-            for (i in array.indices){
-                array[i]=universities[i].name
+            val uniNames= arrayOfNulls<String>(universities.size)
+            for (i in uniNames.indices){
+                uniNames[i]=universities[i].name
             }
-            val aa = ArrayAdapter(context, android.R.layout.simple_spinner_item, array)
+            val aa = ArrayAdapter(context, android.R.layout.simple_spinner_item, uniNames)
             // Set layout to use when the list of choices appear
             aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             // Set Adapter to Spinner
-            uni!!.setAdapter(aa)
+            uni!!.adapter = aa
+            uni.onItemSelectedListener=object:AdapterView.OnItemSelectedListener{
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+
+                }
+                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
+                    val uniid=position+1
+                    uniID.postValue(uniid)
+
+                }
+
+            }
         })
 
 
+        majorViewModel.getMajors().observe(this, Observer {
+            majors.addAll(it)
+            val majorNames= arrayOfNulls<String>(majors.size)
+            for(i in majorNames.indices)
+                majorNames[i]=majors[i].name
+            val aa = ArrayAdapter(context, android.R.layout.simple_spinner_item, majorNames)
+            // Set layout to use when the list of choices appear
+            aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Set Adapter to Spinner
+            major!!.adapter = aa
+            major.onItemSelectedListener=object:AdapterView.OnItemSelectedListener{
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+
+                }
+                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
+                    val major_id=position+1
+                    majorID.postValue(major_id)
+                }
+            }
+        })
 
 
         view!!.btn_login.setOnClickListener {
-            loginViewModel.login(email.text.toString(),password.text.toString(),1,1,activity)
+            loginViewModel.login(email.text.toString(),password.text.toString(),uniID.value!!,majorID.value!!,activity)
         }
-
 
         loginViewModel.getLoadState().observe(this, Observer {
             when(it) {
@@ -119,26 +161,69 @@ class LoginFragment : Fragment(),KodeinAware,AdapterView.OnItemSelectedListener 
                 }
                 DataLoadState.FAILED -> {
                     determinateBar.visibility = View.VISIBLE
-                    Snackbar.make(myView, "No Internet Connection", Snackbar.LENGTH_INDEFINITE)
+                    Snackbar.make(myView, R.string.nointernet, Snackbar.LENGTH_INDEFINITE)
                         .setAction("RETRY") {
-//                            loginViewModel.login(email.text.toString(),password.text.toString(),activity)
+                            //loginViewModel.login(email.text.toString(),password.text.toString(),activity)
                         }.show()
+                }
+                DataLoadState.FAILURE->
+                {
+                    determinateBar.visibility=View.GONE
+                    Toast.makeText(context,R.string.loginfailure,Toast.LENGTH_SHORT).show()
                 }
             }
         })
+        loadStateUni()
+        loadStateMajor()
+
+
+
+
     }
 
     override fun onDestroy() {
         super.onDestroy()
         loginViewModel.cancelJob()
+        universityViewModel.cancelJob()
+        majorViewModel.cancelJob()
     }
-    override fun onNothingSelected(p0: AdapterView<*>?) {
-
+    private fun loadStateUni(){
+        universityViewModel.getDataLoadState().observe(this, Observer {
+            when(it) {
+                DataLoadState.LOADING -> {
+                    determinateBar.visibility = View.VISIBLE
+                }
+                DataLoadState.LOADED -> {
+                    determinateBar.visibility = View.GONE
+                }
+                DataLoadState.FAILED -> {
+                    determinateBar.visibility = View.VISIBLE
+                    Snackbar.make(myView, "No Internet Connection", Snackbar.LENGTH_INDEFINITE)
+                        .setAction("RETRY") {
+                            //                            loginViewModel.login(email.text.toString(),password.text.toString(),activity)
+                        }.show()
+                }
+            }
+        })
     }
-
-    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
-
+    private fun loadStateMajor(){
+        majorViewModel.getDataLoadState().observe(this, Observer {
+            when(it) {
+                DataLoadState.LOADING -> {
+                    determinateBar.visibility = View.VISIBLE
+                }
+                DataLoadState.LOADED -> {
+                    determinateBar.visibility = View.GONE
+                }
+                DataLoadState.FAILED -> {
+                    determinateBar.visibility = View.VISIBLE
+                    Snackbar.make(myView, "No Internet Connection", Snackbar.LENGTH_INDEFINITE)
+                        .setAction("RETRY") {
+                            //                            loginViewModel.login(email.text.toString(),password.text.toString(),activity)
+                        }.show()
+                }
+            }
+        })
     }
-
 
 }
