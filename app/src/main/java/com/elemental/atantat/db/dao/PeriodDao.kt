@@ -13,6 +13,4 @@ interface PeriodDao {
 
     @Query("DELETE FROM periods")
     fun deleteTable()
-
-
 }

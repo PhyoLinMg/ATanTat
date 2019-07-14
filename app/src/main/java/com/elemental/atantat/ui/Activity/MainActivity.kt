@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         sharedPreference = SharedPreference(this)
-        MyReceiver= InternetReceiver()
+        MyReceiver= InternetReceiver(this)
         changecolor()
         broadcastIntent()
     }

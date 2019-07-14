@@ -4,18 +4,24 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.elemental.atantat.data.models.Major
 import com.elemental.atantat.data.models.Period
+import com.elemental.atantat.data.models.Subject
+import com.elemental.atantat.db.dao.MajorDao
 import com.elemental.atantat.db.dao.PeriodDao
+import com.elemental.atantat.db.dao.SubjectDao
 
 
 @Database(
     //gonna import all the model class
-    entities = arrayOf(Period::class),
+    entities = arrayOf(Period::class, Subject::class, Major::class),
     version = 1,
     exportSchema = false
 )
 abstract class AtanTatDatabase:RoomDatabase() {
     abstract fun PeriodDao(): PeriodDao
+    abstract fun SubjectDao(): SubjectDao
+    abstract fun MajorDao(): MajorDao
 
 
     companion object {

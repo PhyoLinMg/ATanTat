@@ -48,7 +48,6 @@ class PeriodRepositoryImpl(val context:Context) : PeriodRepository, CoroutineSco
                         }
                         else {
                             load()
-                            Log.d("period", periods.toString())
                         }
                     }
                 }

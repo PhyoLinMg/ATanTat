@@ -85,6 +85,10 @@ class HomeFragment : Fragment() ,KodeinAware{
 
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.cancelJob()
+    }
 
 
 }
