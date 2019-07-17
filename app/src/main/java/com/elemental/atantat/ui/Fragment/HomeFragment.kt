@@ -7,9 +7,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.elemental.atantat.R
+import com.elemental.atantat.adapter.PeriodAdapter
 import com.elemental.atantat.data.models.Period
 import com.elemental.atantat.repository.periodRepo.PeriodRepository
 import com.elemental.atantat.repository.periodRepo.PeriodRepositoryImpl
@@ -25,6 +28,7 @@ import kotlinx.android.synthetic.main.fragment_login.determinateBar
 import kotlinx.android.synthetic.main.fragment_login.email
 import kotlinx.android.synthetic.main.fragment_login.password
 import kotlinx.android.synthetic.main.fragment_register.*
+import kotlinx.android.synthetic.main.home_fragment.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
@@ -35,9 +39,8 @@ class HomeFragment : Fragment() ,KodeinAware{
     private val viewModelFactory: HomeViewModelFactory by instance()
 
     private lateinit var myView: View
+    private lateinit var periodAdapter: PeriodAdapter
     private val periods: MutableList<Period> = ArrayList()
-
-    private lateinit var sharedPreference: SharedPreference
 
     companion object {
         fun newInstance() = HomeFragment()
@@ -55,14 +58,22 @@ class HomeFragment : Fragment() ,KodeinAware{
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        Log.d("created","Home Created")
         viewModel = ViewModelProviders.of(this,viewModelFactory).get(HomeViewModel::class.java)
-
-
-        viewModel.loadPeriods()
-
-//        viewModel.getPeriods().observe(this, Observer {
-//            periods.addAll(it)
-//        })
+        periodAdapter= PeriodAdapter(periods,context!!)
+        periodcycler.apply {
+            layoutManager = LinearLayoutManager(context)
+            setHasFixedSize(true)
+            adapter = periodAdapter
+        }
+        if (periods != null && periods.isEmpty()) {
+            viewModel.loadPeriods()
+            viewModel.getPeriods().observe(this,Observer{
+                periods.addAll(it)
+                periodAdapter.notifyDataSetChanged()
+            })
+        }
+        Log.d("periods",periods.toString())
 
         viewModel.getLoadState().observe(this, Observer {
             when(it) {
@@ -83,6 +94,12 @@ class HomeFragment : Fragment() ,KodeinAware{
         })
 
 
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("paused","Home Paused")
+        Log.d("periods",periods.toString())
     }
 
     override fun onDestroy() {

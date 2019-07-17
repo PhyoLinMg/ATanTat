@@ -42,10 +42,6 @@ class SubjectRepositoryImpl(val context:Context) : SubjectRepository,CoroutineSc
                     response.isSuccessful ->  {
                         if(db.SubjectDao().subjects().count()==0){
                             db.SubjectDao().insert(response.body()!!.subjects)
-                            load()
-                        }
-                        else {
-                            load()
                         }
                     }
                 }
@@ -56,6 +52,8 @@ class SubjectRepositoryImpl(val context:Context) : SubjectRepository,CoroutineSc
                 Log.e("MY_ERROR", "I don't know! $e")
                 dataLoadState.postValue(DataLoadState.FAILED)
             }
+            subjects.postValue(db.SubjectDao().subjects())
+            dataLoadState.postValue(DataLoadState.LOADED)
         }
     }
 
@@ -66,7 +64,7 @@ class SubjectRepositoryImpl(val context:Context) : SubjectRepository,CoroutineSc
     override fun cancelJob() {
         mJob.cancel()
     }
-    fun load(){
+    private fun load(){
         subjects.postValue(db.SubjectDao().subjects())
         dataLoadState.postValue(DataLoadState.LOADED)
     }

@@ -5,16 +5,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.Fragment.HomeFragment">
-    <ProgressBar
-            android:id="@+id/determinateBar"
-            style="@android:style/Widget.Material.ProgressBar"
-            android:layout_centerInParent="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:progress="100"/>
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Welcome from Home"/>
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent">
+        <ProgressBar
+                android:id="@+id/determinateBar"
+                style="@android:style/Widget.Material.ProgressBar"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:progress="100"/>
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/periodcycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </RelativeLayout>
 
 </FrameLayout>

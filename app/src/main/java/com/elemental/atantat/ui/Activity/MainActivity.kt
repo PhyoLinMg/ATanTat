@@ -40,12 +40,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun broadcastIntent() {
-        registerReceiver(MyReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+        registerReceiver(MyReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
     }
 
     override fun onResume() {
         super.onResume()
         changecolor()
+        broadcastIntent()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        unregisterReceiver(MyReceiver)
     }
 
     private fun setUpViewPager() {

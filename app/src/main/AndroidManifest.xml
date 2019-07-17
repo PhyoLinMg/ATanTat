@@ -15,6 +15,9 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ui.Activity.TestingActivity">
+
+        </activity>
         <activity
                 android:name=".ui.Activity.SettingsActivity"
                 android:label="@string/title_activity_settings"
@@ -44,13 +47,13 @@
         </activity>
         <activity android:name=".ui.Activity.MainActivity">
         </activity>
-        <receiver android:name = ".utils.broadcastReceiver.InternetReceiver">
+
+        <receiver android:name=".utils.broadcastReceiver.InternetReceiver">
             <intent-filter>
-                <action android:name = "android.net.conn.CONNECTIVITY_CHANGE" />
-                <action android:name = "android.net.wifi.WIFI_STATE_CHANGED" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED"/>
             </intent-filter>
         </receiver>
-
     </application>
 
 </manifest>

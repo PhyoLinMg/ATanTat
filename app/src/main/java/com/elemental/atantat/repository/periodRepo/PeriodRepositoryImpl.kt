@@ -44,10 +44,6 @@ class PeriodRepositoryImpl(val context:Context) : PeriodRepository, CoroutineSco
                     response.isSuccessful ->  {
                         if(db.PeriodDao().periods().count()==0){
                             db.PeriodDao().insert(response.body()!!.periods)
-                            load()
-                        }
-                        else {
-                            load()
                         }
                     }
                 }
@@ -58,10 +54,13 @@ class PeriodRepositoryImpl(val context:Context) : PeriodRepository, CoroutineSco
                 Log.e("MY_ERROR", "I don't know! $e")
                 dataLoadState.postValue(DataLoadState.FAILED)
             }
+            periods.postValue(db.PeriodDao().periods())
+            dataLoadState.postValue(DataLoadState.LOADED)
         }
 
     }
     override fun getPeriod(): LiveData<List<Period>> {
+        dataLoadState.postValue(DataLoadState.LOADED)
         return periods
     }
 
@@ -71,8 +70,5 @@ class PeriodRepositoryImpl(val context:Context) : PeriodRepository, CoroutineSco
     override fun getDataLoadState(): LiveData<DataLoadState> {
         return dataLoadState
     }
-    fun load(){
-        periods.postValue(db.PeriodDao().periods())
-        dataLoadState.postValue(DataLoadState.LOADED)
-    }
+
 }

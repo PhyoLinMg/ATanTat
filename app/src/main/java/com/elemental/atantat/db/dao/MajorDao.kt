@@ -9,7 +9,7 @@ import com.elemental.atantat.data.models.Major
 @Dao
 interface MajorDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(periods:List<Major>)
+    fun insert(majors:List<Major>)
 
     @Query("SELECT * from majors")
     fun periods():List<Major>

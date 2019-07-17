@@ -6,9 +6,11 @@
         android:layout_height="match_parent"
         tools:context=".ui.Fragment.SubjectFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/sub_recycler"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Welcome from Subject"/>
+            android:layout_height="match_parent">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </FrameLayout>
