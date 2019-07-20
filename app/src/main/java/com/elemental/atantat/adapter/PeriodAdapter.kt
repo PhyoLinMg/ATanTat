@@ -1,29 +1,20 @@
 package com.elemental.atantat.adapter
 
 import android.content.Context
-import android.os.AsyncTask
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.elemental.atantat.R
 import com.elemental.atantat.data.models.Period
-import com.elemental.atantat.data.models.Subject
 import com.elemental.atantat.db.AtanTatDatabase
-import com.elemental.atantat.usecases.test
+import com.elemental.atantat.usecases.AtanTatUseCase
 import com.elemental.atantat.utils.inflate
-import kotlinx.android.synthetic.main.period_card.view.*
 import org.jetbrains.anko.doAsync
 
 class PeriodAdapter (private val periods: List<Period>, val context: Context): RecyclerView.Adapter<PeriodAdapter.PeriodViewHolder>() {
-    private val db:AtanTatDatabase= AtanTatDatabase.invoke(context)
-    private val test:test= test(context)
-
-
-
+    private val atanTatUseCase:AtanTatUseCase= AtanTatUseCase(context)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PeriodViewHolder {
         return PeriodViewHolder(parent.inflate(R.layout.period_card))
@@ -46,14 +37,13 @@ class PeriodAdapter (private val periods: List<Period>, val context: Context): R
         override fun onClick(view: View?) {
             if(view?.id==btnYes.id){
                doAsync {
-                   Log.d("yes",test.test(periods[adapterPosition].subjectId).toString())
+                   atanTatUseCase.add(periods[adapterPosition].subjectId,true)
                }
             }
             else if(view?.id==btnNo.id){
                 doAsync {
-                    Toast.makeText(context,test.test(periods[adapterPosition].subjectId).toString(),Toast.LENGTH_SHORT).show()
+                    atanTatUseCase.add(periods[adapterPosition].subjectId,false)
                 }
-
             }
         }
 

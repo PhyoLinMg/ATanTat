@@ -56,6 +56,7 @@ class MajorRepositoryImpl(val context: Context) : MajorRepository,CoroutineScope
     }
 
     override fun getMajors(): LiveData<List<Major>> {
+        dataLoadState.postValue(DataLoadState.LOADED)
         return majors
     }
 

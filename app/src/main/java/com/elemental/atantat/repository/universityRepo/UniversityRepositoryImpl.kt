@@ -56,6 +56,7 @@ class UniversityRepositoryImpl(val context: Context): UniversityRepository,Corou
     }
 
     override fun getUniversities(): LiveData<List<University>> {
+        dataLoadState.postValue(DataLoadState.LOADED)
         return universities
     }
 

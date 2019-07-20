@@ -151,6 +151,7 @@ class RegisterFragment : Fragment(),KodeinAware {
             signupViewModel.signup(name.text.toString(),email.text.toString(),password.text.toString(),password_confirmation.text.toString(),uniID.value!!,majorID.value!!,activity)
         }
         signupViewModel.getLoadState().observe(this, Observer {
+            Log.d("signup",signupViewModel.getLoadState().value.toString())
             when(it) {
                 DataLoadState.LOADING -> {
                     determinateBar.visibility = View.VISIBLE
@@ -180,6 +181,7 @@ class RegisterFragment : Fragment(),KodeinAware {
 
     private fun loadStateUni(){
         universityViewModel.getDataLoadState().observe(this, Observer {
+            Log.d("unistate",universityViewModel.getDataLoadState().value.toString())
             when(it) {
                 DataLoadState.LOADING -> {
                     determinateBar.visibility = View.VISIBLE
@@ -199,6 +201,7 @@ class RegisterFragment : Fragment(),KodeinAware {
     }
     private fun loadStateMajor(){
         majorViewModel.getDataLoadState().observe(this, Observer {
+            Log.d("majorstate",majorViewModel.getDataLoadState().value.toString())
             when(it) {
                 DataLoadState.LOADING -> {
                     determinateBar.visibility = View.VISIBLE

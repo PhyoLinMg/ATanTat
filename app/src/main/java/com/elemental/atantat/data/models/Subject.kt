@@ -13,7 +13,7 @@ data class Subject(
     @SerializedName("name")
     val name: String,
     @SerializedName("yes")
-    val no: Int,
+    val yes: Int,
     @SerializedName("no")
-    val yes: Int
+    val no: Int
 )

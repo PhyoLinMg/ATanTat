@@ -14,20 +14,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.elemental.atantat.R
 import com.elemental.atantat.adapter.PeriodAdapter
 import com.elemental.atantat.data.models.Period
-import com.elemental.atantat.repository.periodRepo.PeriodRepository
-import com.elemental.atantat.repository.periodRepo.PeriodRepositoryImpl
+
 import com.elemental.atantat.utils.DataLoadState
-import com.elemental.atantat.utils.SharedPreference
+
 import com.elemental.atantat.viewmodel.HomeViewModel.HomeViewModel
 import com.elemental.atantat.viewmodel.HomeViewModel.HomeViewModelFactory
-import com.elemental.atantat.viewmodel.LoginViewModel.LoginViewModel
-import com.elemental.atantat.viewmodel.LoginViewModel.LoginViewModelFactory
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.determinateBar
-import kotlinx.android.synthetic.main.fragment_login.email
-import kotlinx.android.synthetic.main.fragment_login.password
-import kotlinx.android.synthetic.main.fragment_register.*
+
 import kotlinx.android.synthetic.main.home_fragment.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein

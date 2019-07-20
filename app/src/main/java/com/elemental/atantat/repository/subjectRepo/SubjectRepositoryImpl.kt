@@ -15,6 +15,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import org.jetbrains.anko.doAsync
 import kotlin.coroutines.CoroutineContext
 
 class SubjectRepositoryImpl(val context:Context) : SubjectRepository,CoroutineScope{
@@ -58,6 +59,7 @@ class SubjectRepositoryImpl(val context:Context) : SubjectRepository,CoroutineSc
     }
 
     override fun getSubjects(): LiveData<List<Subject>> {
+        dataLoadState.postValue(DataLoadState.LOADED)
         return subjects
     }
 

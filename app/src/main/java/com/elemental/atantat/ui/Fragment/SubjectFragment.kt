@@ -1,5 +1,6 @@
 package com.elemental.atantat.ui.Fragment
 
+import android.graphics.Color
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
@@ -7,18 +8,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
 import com.elemental.atantat.R
 import com.elemental.atantat.adapter.SubjectAdapter
 import com.elemental.atantat.data.models.Subject
+import com.elemental.atantat.db.AtanTatDatabase
 import com.elemental.atantat.utils.DataLoadState
 import com.elemental.atantat.viewmodel.SubjectViewModel.SubjectViewModel
 import com.elemental.atantat.viewmodel.SubjectViewModel.SubjectViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.subject_fragment.*
+import org.jetbrains.anko.doAsync
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
@@ -28,6 +33,7 @@ class SubjectFragment : Fragment(),KodeinAware {
     private val subjectViewModelFactory:SubjectViewModelFactory by instance()
     private lateinit var subjectAdapter: SubjectAdapter
     private lateinit var myView: View
+
     private val subjects: MutableList<Subject> = ArrayList()
     private lateinit var subjectviewModel: SubjectViewModel
 
@@ -49,9 +55,9 @@ class SubjectFragment : Fragment(),KodeinAware {
         super.onActivityCreated(savedInstanceState)
         Log.d("created","subject created")
         subjectviewModel = ViewModelProviders.of(this,subjectViewModelFactory).get(SubjectViewModel::class.java)
-
+        refresh.setColorSchemeColors(Color.BLUE, Color.CYAN, Color.RED)
         subjectAdapter= SubjectAdapter(subjects)
-
+        val db:AtanTatDatabase= AtanTatDatabase.invoke(context!!)
         sub_recycler.apply {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
@@ -63,6 +69,17 @@ class SubjectFragment : Fragment(),KodeinAware {
             subjects.addAll(it)
             subjectAdapter.notifyDataSetChanged()
         })
+
+
+        refresh.setOnRefreshListener {
+            subjects.clear()
+            doAsync {
+                subjects.addAll(db.SubjectDao().subjects())
+            }
+            subjectAdapter.notifyDataSetChanged()
+            refresh.isRefreshing=false
+        }
+
 
         subjectviewModel.getDataLoadState().observe(this, Observer {
             when(it) {

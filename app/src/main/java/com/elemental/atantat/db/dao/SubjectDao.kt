@@ -1,9 +1,7 @@
 package com.elemental.atantat.db.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.lifecycle.LiveData
+import androidx.room.*
 import com.elemental.atantat.data.models.Subject
 
 
@@ -20,4 +18,8 @@ interface SubjectDao {
 
     @Query("DELETE FROM subjects")
     fun deleteTable()
+
+    @Update
+    fun update(subject: Subject)
+
 }
