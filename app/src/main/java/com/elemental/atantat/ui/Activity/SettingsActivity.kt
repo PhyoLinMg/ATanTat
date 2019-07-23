@@ -24,6 +24,7 @@ class SettingsActivity : AppCompatActivity() {
         sharedPreference = SharedPreference(this)
 
         backgroundChange()
+        notification()
     }
 
     private fun backgroundChange(){
@@ -48,6 +49,19 @@ class SettingsActivity : AppCompatActivity() {
             text.setTextColor(Color.BLACK)
         }
         layout.setBackgroundColor(color)
+    }
+    private fun notification(){
+        switchNotification.setOnClickListener{
+            if(switchNotification.isChecked){
+                sharedPreference.save("noti",true)
+            }
+            else{
+                sharedPreference.save("noti",false)
+            }
+            val status=sharedPreference.getValueBoolean("noti",false)
+            Log.d("status",status.toString())
+
+        }
     }
 
 

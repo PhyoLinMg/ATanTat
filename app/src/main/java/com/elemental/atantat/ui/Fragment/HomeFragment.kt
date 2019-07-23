@@ -60,6 +60,7 @@ class HomeFragment : Fragment() ,KodeinAware{
             setHasFixedSize(true)
             adapter = periodAdapter
         }
+
         if (periods != null && periods.isEmpty()) {
             viewModel.loadPeriods()
             viewModel.getPeriods().observe(this,Observer{
@@ -67,7 +68,6 @@ class HomeFragment : Fragment() ,KodeinAware{
                 periodAdapter.notifyDataSetChanged()
             })
         }
-        Log.d("periods",periods.toString())
 
         viewModel.getLoadState().observe(this, Observer {
             when(it) {
