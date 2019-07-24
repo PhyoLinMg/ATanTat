@@ -10,6 +10,18 @@ import com.elemental.atantat.utils.SharedPreference
 
 import kotlinx.android.synthetic.main.activity_settings.*
 import kotlinx.android.synthetic.main.content_settings.*
+import android.widget.Toast
+
+import android.app.PendingIntent
+
+import android.app.AlarmManager
+
+import android.content.Context
+import com.elemental.atantat.utils.broadcastReceiver.NotiReceiver
+
+
+
+
 
 
 class SettingsActivity : AppCompatActivity() {
@@ -59,7 +71,18 @@ class SettingsActivity : AppCompatActivity() {
                 sharedPreference.save("noti",false)
             }
             val status=sharedPreference.getValueBoolean("noti",false)
-            Log.d("status",status.toString())
+            if(status){
+                val alarmManager = this.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+                val intent = Intent(this, NotiReceiver::class.java)
+                val pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0)
+                alarmManager.setRepeating(
+                    AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 60000,
+                    pendingIntent
+                )
+                Toast.makeText(this, "Notification on", Toast.LENGTH_SHORT).show()
+
+
+            }
 
         }
     }

@@ -4,21 +4,19 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import android.widget.Toast
 import com.elemental.atantat.data.models.Times
 import com.elemental.atantat.db.AtanTatDatabase
 import java.util.*
 
-class NotiReceiver(val context: Context): BroadcastReceiver() {
-    private val db:AtanTatDatabase= AtanTatDatabase.invoke(context)
+class NotiReceiver: BroadcastReceiver() {
+//    private val db:AtanTatDatabase= AtanTatDatabase.invoke(context)
     private val times: MutableList<Times> = ArrayList()
 
     override fun onReceive(context: Context?, intent: Intent?) {
         val hour=getHourofDay()
         val min=getMinute()
-        times.addAll(db.PeriodDao().times())
-        times.forEach {
-            Log.d("times",it.toString())
-        }
+        Toast.makeText(context,"Received",Toast.LENGTH_SHORT).show()
 
     }
     fun getHourofDay(): Int {

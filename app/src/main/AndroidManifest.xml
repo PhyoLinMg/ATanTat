@@ -47,7 +47,7 @@
         </activity>
         <activity android:name=".ui.Activity.MainActivity">
         </activity>
-
+        <receiver android:name=".utils.broadcastReceiver.NotiReceiver"/>
         <receiver android:name=".utils.broadcastReceiver.InternetReceiver">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
