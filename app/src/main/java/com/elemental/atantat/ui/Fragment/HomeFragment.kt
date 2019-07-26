@@ -69,6 +69,7 @@ class HomeFragment : Fragment() ,KodeinAware{
             })
         }
 
+
         viewModel.getLoadState().observe(this, Observer {
             when(it) {
                 DataLoadState.LOADING -> {

@@ -20,6 +20,7 @@ import android.content.BroadcastReceiver
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 import com.elemental.atantat.utils.broadcastReceiver.InternetReceiver
+import kotlin.coroutines.CoroutineContext
 
 
 class MainActivity : AppCompatActivity() {
@@ -35,10 +36,11 @@ class MainActivity : AppCompatActivity() {
 
         sharedPreference = SharedPreference(this)
         MyReceiver= InternetReceiver(this)
+
         changecolor()
         broadcastIntent()
-    }
 
+    }
     private fun broadcastIntent() {
         registerReceiver(MyReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
     }

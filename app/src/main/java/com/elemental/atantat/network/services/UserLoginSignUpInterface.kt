@@ -1,8 +1,8 @@
 package com.elemental.atantat.network.services
 
-import com.elemental.atantat.data.user_panel.LoginResponse
+import com.elemental.atantat.data.responses.LoginResponse
 import com.elemental.atantat.data.models.LoginUser
-import com.elemental.atantat.data.user_panel.SignUpResponse
+import com.elemental.atantat.data.responses.SignUpResponse
 import com.elemental.atantat.data.models.SignUpUser
 import com.elemental.atantat.network.ConnectivityInterceptor
 import com.elemental.atantat.utils.Const

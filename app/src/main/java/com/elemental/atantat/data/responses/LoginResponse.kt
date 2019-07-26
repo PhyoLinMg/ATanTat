@@ -1,4 +1,4 @@
-package com.elemental.atantat.data.user_panel
+package com.elemental.atantat.data.responses
 
 
 import com.google.gson.annotations.SerializedName

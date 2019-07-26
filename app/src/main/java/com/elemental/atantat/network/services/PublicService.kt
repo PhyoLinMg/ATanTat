@@ -20,6 +20,8 @@ interface PublicService {
     @GET("majors")
     fun getMajorsAsync():Deferred<Response<Majors>>
 
+
+
     companion object {
         operator fun invoke(
             connectivityInterceptor: ConnectivityInterceptor

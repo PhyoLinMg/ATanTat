@@ -2,6 +2,8 @@ package com.elemental.atantat.network.services
 
 import com.elemental.atantat.data.models.Periods
 import com.elemental.atantat.data.models.Subjects
+import com.elemental.atantat.data.models.YesNo
+import com.elemental.atantat.data.responses.AttendanceResponse
 import com.elemental.atantat.network.ConnectivityInterceptor
 import com.elemental.atantat.utils.Const
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
@@ -11,7 +13,11 @@ import okhttp3.OkHttpClient
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
+import retrofit2.http.POST
+
 
 interface MainService{
 
@@ -20,6 +26,11 @@ interface MainService{
 
     @GET("subjects")
     fun getSubjectsAsync():Deferred<Response<Subjects>>
+
+    @FormUrlEncoded
+    @POST("attendances")
+    fun postattendances(@Field("yesno") yesno: List<YesNo>):Deferred<Response<AttendanceResponse>>
+
 
 
     companion object {

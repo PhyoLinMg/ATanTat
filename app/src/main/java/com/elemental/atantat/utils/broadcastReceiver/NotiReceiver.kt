@@ -10,7 +10,7 @@ import com.elemental.atantat.db.AtanTatDatabase
 import java.util.*
 
 class NotiReceiver: BroadcastReceiver() {
-//    private val db:AtanTatDatabase= AtanTatDatabase.invoke(context)
+   // private val db:AtanTatDatabase= AtanTatDatabase.invoke(context)
     private val times: MutableList<Times> = ArrayList()
 
     override fun onReceive(context: Context?, intent: Intent?) {
@@ -19,12 +19,13 @@ class NotiReceiver: BroadcastReceiver() {
         Toast.makeText(context,"Received",Toast.LENGTH_SHORT).show()
 
     }
-    fun getHourofDay(): Int {
+
+    private fun getHourofDay(): Int {
         val calendar = Calendar.getInstance()
         return calendar.get(Calendar.HOUR_OF_DAY)
     }
 
-    fun getMinute(): Int {
+    private fun getMinute(): Int {
         val calendar = Calendar.getInstance()
         return calendar.get(Calendar.MINUTE)
     }
