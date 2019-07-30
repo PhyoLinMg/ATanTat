@@ -1,5 +1,6 @@
 package com.elemental.atantat.utils.broadcastReceiver
 
+import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -15,26 +16,20 @@ import kotlin.coroutines.CoroutineContext
 class InternetReceiver(val context: Context): BroadcastReceiver() {
     private val db:AtanTatDatabase= AtanTatDatabase.invoke(context)
     private val yesno: MutableList<YesNo> = ArrayList()
+//    private val postAttendanceUseCase=PostAttendanceUseCase(context)
+    private lateinit var yesNo: YesNo
 
+    @SuppressLint("UnsafeProtectedBroadcastReceiver")
     override fun onReceive(context: Context?, intent: Intent?) {
         val networkUtil= NetworkUtil()
         var status:String?=networkUtil.getConnectivityStatusString(context!!)
         if(status!!.isEmpty()){
-            Log.d("empty","It is empty ty")
+
         }
         else if(status=="Mobile data enabled" || status=="Wifi enabled"){
-            post()
+            Toast.makeText(context,status,Toast.LENGTH_SHORT).show()
         }
     }
-    private fun post(){
-        doAsync {
-            if(yesno.isEmpty()){
-                yesno.addAll(db.SubjectDao().getattendence())
-            }
-        }
-        val postAttendanceUseCase=PostAttendanceUseCase(context)
-        postAttendanceUseCase.go(yesno)
-        Log.d("gg",yesno.toString())
 
-    }
+
 }

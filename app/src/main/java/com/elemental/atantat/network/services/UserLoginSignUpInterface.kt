@@ -4,6 +4,8 @@ import com.elemental.atantat.data.responses.LoginResponse
 import com.elemental.atantat.data.models.LoginUser
 import com.elemental.atantat.data.responses.SignUpResponse
 import com.elemental.atantat.data.models.SignUpUser
+import com.elemental.atantat.data.models.YesNo
+import com.elemental.atantat.data.responses.AttendanceResponse
 import com.elemental.atantat.network.ConnectivityInterceptor
 import com.elemental.atantat.utils.Const
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory

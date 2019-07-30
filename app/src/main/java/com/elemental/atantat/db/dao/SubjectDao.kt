@@ -17,7 +17,7 @@ interface SubjectDao {
     @Query("SELECT * from subjects WHERE id= :id")
     fun subject(id:Int) :List<Subject>
 
-    @Query("SELECT yes,`no` from subjects")
+    @Query("SELECT id,yes,`no` from subjects")
     fun getattendence():List<YesNo>
 
 

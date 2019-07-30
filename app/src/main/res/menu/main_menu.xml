@@ -3,8 +3,24 @@
 
     <item
             android:id="@+id/action_profile"
-            android:title="Profile" />
+            android:icon="@drawable/ic_account_circle_black"
+            android:title="Profile"
+            app:showAsAction="always"
+
+    />
     <item
             android:id="@+id/action_setting"
-            android:title="Setting" />
+            android:icon="@drawable/ic_settings_black"
+            android:title="Setting"
+            app:showAsAction="always"
+
+    />
+    <item
+            android:id="@+id/synchronise"
+            android:icon="@drawable/ic_sync_black"
+            android:title="Sync"
+            app:showAsAction="ifRoom
+"
+
+        />
 </menu>

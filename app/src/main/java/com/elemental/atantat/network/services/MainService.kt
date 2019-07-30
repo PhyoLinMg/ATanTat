@@ -13,10 +13,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 
 interface MainService{
@@ -27,9 +24,8 @@ interface MainService{
     @GET("subjects")
     fun getSubjectsAsync():Deferred<Response<Subjects>>
 
-    @FormUrlEncoded
     @POST("attendances")
-    fun postattendances(@Field("yesno") yesno: List<YesNo>):Deferred<Response<AttendanceResponse>>
+    fun postattendancesAsync(@Body yesNo: YesNo): Deferred<Response<AttendanceResponse>>
 
 
 

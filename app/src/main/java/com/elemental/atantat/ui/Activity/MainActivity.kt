@@ -3,38 +3,45 @@ package com.elemental.atantat.ui.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-
 import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
-
 import com.elemental.atantat.R
 import com.elemental.atantat.adapter.ViewPagerAdapter
 import com.elemental.atantat.ui.Fragment.HomeFragment
 import com.elemental.atantat.ui.Fragment.MajorFragment
 import com.elemental.atantat.ui.Fragment.SubjectFragment
 import com.elemental.atantat.utils.SharedPreference
-
 import kotlinx.android.synthetic.main.activity_main.*
 import android.content.BroadcastReceiver
 import android.content.IntentFilter
 import android.net.ConnectivityManager
+import com.elemental.atantat.data.models.YesNo
+import com.elemental.atantat.db.AtanTatDatabase
+import com.elemental.atantat.network.ConnectivityInterceptorImpl
+import com.elemental.atantat.network.services.MainService
+import com.elemental.atantat.usecases.PostAttendanceUseCase
 import com.elemental.atantat.utils.broadcastReceiver.InternetReceiver
-import kotlin.coroutines.CoroutineContext
+import org.jetbrains.anko.doAsync
 
 
 class MainActivity : AppCompatActivity() {
     var fragment: Fragment? = null
     private lateinit var sharedPreference: SharedPreference
     private lateinit var MyReceiver: BroadcastReceiver
+    private lateinit var db:AtanTatDatabase
+    private lateinit var  postAttendanceUseCase:PostAttendanceUseCase
+    private lateinit var api:MainService
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+        sharedPreference= SharedPreference(this)
 
-        sharedPreference = SharedPreference(this)
         MyReceiver= InternetReceiver(this)
 
         changecolor()
@@ -88,6 +95,21 @@ class MainActivity : AppCompatActivity() {
         R.id.action_setting -> {
             val setting = Intent(this@MainActivity, SettingsActivity::class.java)
             startActivity(setting)
+            true
+        }
+        R.id.synchronise->{
+            db= AtanTatDatabase.invoke(this)
+            api= MainService.invoke(ConnectivityInterceptorImpl(this),sharedPreference.getValueString("token")!!)
+            postAttendanceUseCase= PostAttendanceUseCase(this,sharedPreference)
+            doAsync {
+                val yesNo=db.SubjectDao().getattendence()
+                yesNo.forEach {
+                    val yesno=YesNo(it.id,it.yes,it.no)
+                    postAttendanceUseCase.go(yesno)
+                }
+
+
+            }
             true
         }
         else -> {
