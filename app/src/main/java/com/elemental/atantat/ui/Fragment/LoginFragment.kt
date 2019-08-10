@@ -69,6 +69,7 @@ class LoginFragment : Fragment(),KodeinAware {
     private val universities: MutableList<University> = ArrayList()
     private val majors:MutableList<Major> = ArrayList()
 
+
     private val uniID:MutableLiveData<Int> = MutableLiveData()
     private val majorID:MutableLiveData<Int> = MutableLiveData()
 
@@ -151,6 +152,8 @@ class LoginFragment : Fragment(),KodeinAware {
             loginViewModel.login(email.text.toString(),password.text.toString(),uniID.value!!,majorID.value!!,activity)
         }
 
+
+
         loginViewModel.getLoadState().observe(this, Observer {
             when(it) {
                 DataLoadState.LOADING -> {
@@ -175,6 +178,7 @@ class LoginFragment : Fragment(),KodeinAware {
         })
         loadStateUni()
         loadStateMajor()
+
 
 
 

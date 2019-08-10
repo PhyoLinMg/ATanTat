@@ -16,11 +16,16 @@ import kotlinx.android.synthetic.main.activity_main.*
 import android.content.BroadcastReceiver
 import android.content.IntentFilter
 import android.net.ConnectivityManager
+import android.util.Log
+import android.widget.Toast
+import androidx.lifecycle.Observer
 import com.elemental.atantat.data.models.YesNo
 import com.elemental.atantat.db.AtanTatDatabase
 import com.elemental.atantat.network.ConnectivityInterceptorImpl
 import com.elemental.atantat.network.services.MainService
 import com.elemental.atantat.usecases.PostAttendanceUseCase
+import com.elemental.atantat.utils.DataLoadState
+import com.elemental.atantat.utils.NetworkUtil
 import com.elemental.atantat.utils.broadcastReceiver.InternetReceiver
 import org.jetbrains.anko.doAsync
 
@@ -32,9 +37,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var db:AtanTatDatabase
     private lateinit var  postAttendanceUseCase:PostAttendanceUseCase
     private lateinit var api:MainService
-
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -98,18 +100,25 @@ class MainActivity : AppCompatActivity() {
             true
         }
         R.id.synchronise->{
-            db= AtanTatDatabase.invoke(this)
-            api= MainService.invoke(ConnectivityInterceptorImpl(this),sharedPreference.getValueString("token")!!)
-            postAttendanceUseCase= PostAttendanceUseCase(this,sharedPreference)
-            doAsync {
-                val yesNo=db.SubjectDao().getattendence()
-                yesNo.forEach {
-                    val yesno=YesNo(it.id,it.yes,it.no)
-                    postAttendanceUseCase.go(yesno)
-                }
-
-
+            val networkUtil= NetworkUtil()
+            var status:String?=networkUtil.getConnectivityStatusString(this)
+            if(status!!.isEmpty()){
+                Toast.makeText(this,"Failed",Toast.LENGTH_SHORT).show()
             }
+            else if(status=="Mobile data enabled" || status=="Wifi enabled"){
+                db= AtanTatDatabase.invoke(this)
+                api= MainService.invoke(ConnectivityInterceptorImpl(this),sharedPreference.getValueString("token")!!)
+                postAttendanceUseCase= PostAttendanceUseCase(this,sharedPreference)
+                doAsync {
+                    val yesNo=db.SubjectDao().getattendence()
+                    yesNo.forEach {
+                        val yesno=YesNo(it.id,it.yes,it.no)
+                        postAttendanceUseCase.go(yesno)
+                    }
+                }
+                Toast.makeText(this,"Successful",Toast.LENGTH_SHORT).show()
+            }
+
             true
         }
         else -> {
