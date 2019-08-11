@@ -18,9 +18,12 @@ import com.elemental.atantat.repository.subjectRepo.SubjectRepository
 import com.elemental.atantat.repository.subjectRepo.SubjectRepositoryImpl
 import com.elemental.atantat.repository.universityRepo.UniversityRepository
 import com.elemental.atantat.repository.universityRepo.UniversityRepositoryImpl
+import com.elemental.atantat.repository.userRepo.UserRepository
+import com.elemental.atantat.repository.userRepo.UserRepositoryImpl
 import com.elemental.atantat.viewmodel.HomeViewModel.HomeViewModelFactory
 import com.elemental.atantat.viewmodel.LoginViewModel.LoginViewModelFactory
 import com.elemental.atantat.viewmodel.MajorViewModel.MajorViewModelFactory
+import com.elemental.atantat.viewmodel.ProfileViewModel.ProfileViewModelFactory
 import com.elemental.atantat.viewmodel.SignUpViewModel.SignUpViewModelFactory
 import com.elemental.atantat.viewmodel.SubjectViewModel.SubjectViewModelFactory
 import com.elemental.atantat.viewmodel.UniversityViewModel.UniversityViewModelFactory
@@ -29,6 +32,7 @@ import me.myatminsoe.mdetect.MDetect
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
+import org.kodein.di.bindings.Singleton
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
@@ -52,6 +56,7 @@ class AtantatApplication: Application(),KodeinAware {
         bind() from provider{ UniversityViewModelFactory(instance()) }
         bind() from provider{MajorViewModelFactory(instance())}
         bind() from provider {SubjectViewModelFactory(instance())}
+        bind() from provider { ProfileViewModelFactory(instance()) }
 
         bind<LoginRepository>() with singleton { LoginRepositoryImpl(instance())}
         bind<SignUpRepository>() with singleton{ SignUpRepositoryImpl(instance()) }
@@ -59,6 +64,7 @@ class AtantatApplication: Application(),KodeinAware {
         bind<UniversityRepository>() with singleton { UniversityRepositoryImpl(instance()) }
         bind<MajorRepository>() with singleton { MajorRepositoryImpl(instance()) }
         bind<SubjectRepository>() with singleton { SubjectRepositoryImpl(instance()) }
+        bind<UserRepository>() with singleton{ UserRepositoryImpl(instance()) }
     }
     override fun onCreate() {
         super.onCreate()
