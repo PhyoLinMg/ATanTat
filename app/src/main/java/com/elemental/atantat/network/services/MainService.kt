@@ -4,6 +4,7 @@ import com.elemental.atantat.data.models.Periods
 import com.elemental.atantat.data.models.Subjects
 import com.elemental.atantat.data.models.YesNo
 import com.elemental.atantat.data.responses.AttendanceResponse
+import com.elemental.atantat.data.responses.ProflieResponse
 import com.elemental.atantat.network.ConnectivityInterceptor
 import com.elemental.atantat.utils.Const
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
@@ -27,7 +28,8 @@ interface MainService{
     @POST("attendances")
     fun postattendancesAsync(@Body yesNo: YesNo): Deferred<Response<AttendanceResponse>>
 
-
+    @GET("user")
+    fun getUserAsync():Deferred<Response<ProflieResponse>>
 
     companion object {
        operator fun invoke(

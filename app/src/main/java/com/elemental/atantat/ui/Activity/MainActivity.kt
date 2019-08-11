@@ -48,7 +48,6 @@ class MainActivity : AppCompatActivity() {
 
         changecolor()
         broadcastIntent()
-
     }
     private fun broadcastIntent() {
         registerReceiver(MyReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))

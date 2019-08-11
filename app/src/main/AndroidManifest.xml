@@ -15,23 +15,21 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.Activity.TestingActivity">
-
+        <activity
+                android:name=".ui.Activity.ProfileActivity"
+                android:label="@string/title_activity_profile"
+                android:parentActivityName=".ui.Activity.MainActivity"
+                android:theme="@style/AppTheme.ProfileTheme">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.elemental.atantat.ui.Activity.MainActivity"/>
         </activity>
+
         <activity
                 android:name=".ui.Activity.SettingsActivity"
                 android:label="@string/title_activity_settings"
                 android:parentActivityName=".ui.Activity.MainActivity"
                 android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.elemental.atantat.ui.Activity.MainActivity"/>
-        </activity>
-        <activity
-                android:name=".ui.Activity.ProfileActivity"
-                android:label="Profile"
-                android:parentActivityName=".ui.Activity.MainActivity"
-                android:theme="@style/Theme.AppCompat.NoActionBar">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="com.elemental.atantat.ui.Activity.MainActivity"/>
@@ -47,6 +45,7 @@
         </activity>
         <activity android:name=".ui.Activity.MainActivity">
         </activity>
+
         <receiver android:name=".utils.broadcastReceiver.NotiReceiver"/>
         <receiver android:name=".utils.broadcastReceiver.InternetReceiver">
             <intent-filter>
