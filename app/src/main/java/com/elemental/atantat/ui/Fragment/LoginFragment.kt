@@ -178,11 +178,6 @@ class LoginFragment : Fragment(),KodeinAware {
         })
         loadStateUni()
         loadStateMajor()
-
-
-
-
-
     }
 
     override fun onDestroy() {

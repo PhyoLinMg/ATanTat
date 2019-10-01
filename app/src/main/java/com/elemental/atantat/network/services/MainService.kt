@@ -28,6 +28,8 @@ interface MainService{
     @POST("attendances")
     fun postattendancesAsync(@Body yesNo: YesNo): Deferred<Response<AttendanceResponse>>
 
+
+
     @GET("user")
     fun getUserAsync():Deferred<Response<ProfileResponse>>
 
