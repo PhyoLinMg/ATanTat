@@ -17,6 +17,7 @@ import android.app.PendingIntent
 import android.app.AlarmManager
 
 import android.content.Context
+import androidx.appcompat.app.AppCompatDelegate
 import com.elemental.atantat.utils.broadcastReceiver.NotiReceiver
 
 
@@ -36,32 +37,37 @@ class SettingsActivity : AppCompatActivity() {
         sharedPreference = SharedPreference(this)
 
         backgroundChange()
+
         notification()
     }
 
     private fun backgroundChange(){
+
         switchWidget.setOnClickListener {
             if (switchWidget.isChecked) {
-                sharedPreference.save("color", Color.DKGRAY)
-                text.setTextColor(Color.WHITE)
-                layout.setBackgroundColor(Color.DKGRAY)
+                sharedPreference.save("color", "black")
+                delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
+                this@SettingsActivity.recreate()
+
             } else {
-                sharedPreference.save("color", Color.WHITE)
-                text.setTextColor(Color.BLACK)
-                layout.setBackgroundColor(Color.WHITE)
+                sharedPreference.save("color", "white")
+                delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
+                this@SettingsActivity.recreate()
             }
         }
-        val color=sharedPreference.getValueInt("color")
-        if(color==Color.DKGRAY){
-            switchWidget.isChecked =true
-            text.setTextColor(Color.WHITE)
+        val color=sharedPreference.getValueString("color")
+        if(color=="black"){
+            switchWidget.isChecked=true
+            delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
         }
         else{
             switchWidget.isChecked=false
-            text.setTextColor(Color.BLACK)
+            delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
         }
-        layout.setBackgroundColor(color)
+
+
     }
+
     private fun notification(){
         switchNotification.setOnClickListener{
             if(switchNotification.isChecked){

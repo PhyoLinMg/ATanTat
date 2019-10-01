@@ -18,6 +18,7 @@ import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.Observer
 import com.elemental.atantat.data.models.YesNo
 import com.elemental.atantat.db.AtanTatDatabase
@@ -74,9 +75,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun changecolor() {
-        val color = sharedPreference.getValueInt("color")
-        viewPager.setBackgroundColor(color)
-        setUpViewPager()
+        val color = sharedPreference.getValueString("color")
+        if(color=="black"){
+            delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
+            setUpViewPager()
+        }
+        else{
+            delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
+            setUpViewPager()
+        }
 
     }
 
