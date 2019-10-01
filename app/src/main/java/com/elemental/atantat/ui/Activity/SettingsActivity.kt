@@ -62,6 +62,7 @@ class SettingsActivity : AppCompatActivity() {
         }
         else{
             switchWidget.isChecked=false
+
             delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
         }
 

@@ -5,11 +5,13 @@ import android.util.Log
 import android.view.View
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.elemental.atantat.R
+import com.elemental.atantat.utils.SharedPreference
 import com.elemental.atantat.viewmodel.ProfileViewModel.ProfileViewModel
 import com.elemental.atantat.viewmodel.ProfileViewModel.ProfileViewModelFactory
 import kotlinx.android.synthetic.main.activity_profile.*
@@ -19,15 +21,11 @@ import org.kodein.di.android.kodein
 
 import org.kodein.di.generic.instance
 
-
-
-
-
-
 class ProfileActivity : AppCompatActivity(), KodeinAware{
 
     override val kodein by kodein()
     private lateinit var profileViewModel:ProfileViewModel
+    private lateinit var sharedPreference: SharedPreference
     private val profileViewModelFactory:ProfileViewModelFactory by instance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +36,9 @@ class ProfileActivity : AppCompatActivity(), KodeinAware{
 
         profileViewModel = ViewModelProviders.of(this, profileViewModelFactory).get(
             ProfileViewModel::class.java)
+
         profileViewModel.loadUser()
+
 
         profileViewModel.getUser().observe(this, Observer {
             profile_name.text=profileViewModel.getUser().value!!.name
