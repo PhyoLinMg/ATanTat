@@ -35,31 +35,12 @@
                     style="@style/profileDetailsTextMain" />
 
             <TextView
+                    android:id="@+id/profile_name"
                     android:text="developer"
                     android:layout_toRightOf="@id/nameImageView"
                     style="@style/profileDetailsMiniText" />
 
         </RelativeLayout>
-
-        <View style="@style/proifleDetailsView" />
-        <RelativeLayout style="@style/profileDetailsLayout">
-            <ImageView
-                    android:id="@+id/mobileImageView"
-                    android:src="@drawable/ic_mobile"
-                    style="@style/profileDetailsImage" />
-
-            <TextView
-                    android:text="Mobile"
-                    android:layout_toRightOf="@id/mobileImageView"
-                    style="@style/profileDetailsTextMain"/>
-
-            <TextView
-                    android:text="+91-8129999999"
-                    android:layout_toRightOf="@id/mobileImageView"
-                    style="@style/profileDetailsMiniText" />
-
-        </RelativeLayout>
-
         <View style="@style/proifleDetailsView" />
         <RelativeLayout style="@style/profileDetailsLayout">
             <ImageView
@@ -73,6 +54,7 @@
                     style="@style/profileDetailsTextMain" />
 
             <TextView
+                    android:id="@+id/profile_email"
                     android:text="developer@appsnipp.com"
                     android:layout_toRightOf="@id/emailImageView"
                     style="@style/profileDetailsMiniText" />
@@ -87,11 +69,12 @@
                     style="@style/profileDetailsImage" />
 
             <TextView
-                    android:text="Address"
+                    android:text="University"
                     android:layout_toRightOf="@id/addressImageView"
                     style="@style/profileDetailsTextMain" />
 
             <TextView
+                    android:id="@+id/profile_uni"
                     android:text="Avenue 2nd Street NW SY."
                     android:layout_toRightOf="@id/addressImageView"
                     style="@style/profileDetailsMiniText" />
@@ -106,11 +89,12 @@
                     style="@style/profileDetailsImage" />
 
             <TextView
-                    android:text="D.O.B"
+                    android:text="Major"
                     android:layout_toRightOf="@id/dobImageView"
                     style="@style/profileDetailsTextMain" />
 
             <TextView
+                    android:id="@+id/profile_major"
                     android:text="12-05-1990"
                     android:layout_toRightOf="@id/dobImageView"
                     style="@style/profileDetailsMiniText" />
