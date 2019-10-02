@@ -87,11 +87,9 @@ class SettingsActivity : AppCompatActivity() {
                     pendingIntent
                 )
                 Toast.makeText(this, "Notification on", Toast.LENGTH_SHORT).show()
-
-
             }
-
         }
+        switchNotification.isChecked = sharedPreference.getValueBoolean("noti",false)
     }
 
 

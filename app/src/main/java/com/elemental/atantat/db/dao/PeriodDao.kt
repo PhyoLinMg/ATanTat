@@ -15,6 +15,7 @@ interface PeriodDao {
     @Query("SELECT startTime,endTime from periods")
     fun times():List<Times>
 
+
     @Query("DELETE FROM periods")
     fun deleteTable()
 }

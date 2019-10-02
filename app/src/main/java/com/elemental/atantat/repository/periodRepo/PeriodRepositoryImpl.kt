@@ -30,6 +30,7 @@ class PeriodRepositoryImpl(val context:Context) : PeriodRepository, CoroutineSco
     override fun loadPeriod(){
 
         dataLoadState.postValue(DataLoadState.LOADING)
+
         launch {
             try {
                 val response=api.getPeriodsAsync().await()

@@ -25,7 +25,7 @@ class ProfileActivity : AppCompatActivity(), KodeinAware{
 
     override val kodein by kodein()
     private lateinit var profileViewModel:ProfileViewModel
-    private lateinit var sharedPreference: SharedPreference
+
     private val profileViewModelFactory:ProfileViewModelFactory by instance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

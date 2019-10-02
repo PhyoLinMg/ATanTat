@@ -21,6 +21,8 @@ interface SubjectDao {
     fun getattendence():List<YesNo>
 
 
+
+
     @Query("DELETE FROM subjects")
     fun deleteTable()
 
