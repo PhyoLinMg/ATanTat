@@ -36,7 +36,8 @@ class PeriodRepositoryImpl(val context:Context) : PeriodRepository, CoroutineSco
                 val response=api.getPeriodsAsync().await()
                 when {
                     response.isSuccessful ->  {
-                        if(db.PeriodDao().periods().count()==0){
+                        if(db.PeriodDao().periods().count()<response.body()!!.periods.count()){
+                            db.PeriodDao().deleteTable()
                             db.PeriodDao().insert(response.body()!!.periods)
                         }
                     }
