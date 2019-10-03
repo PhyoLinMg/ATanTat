@@ -41,7 +41,8 @@ class SubjectRepositoryImpl(val context:Context) : SubjectRepository,CoroutineSc
                 val response=api.getSubjectsAsync().await()
                 when {
                     response.isSuccessful ->  {
-                        if(db.SubjectDao().subjects().count()==0){
+                        if(db.SubjectDao().subjects().count()<response.body()!!.subjects.count()){
+                            db.SubjectDao().deleteTable()
                             db.SubjectDao().insert(response.body()!!.subjects)
                         }
                     }
