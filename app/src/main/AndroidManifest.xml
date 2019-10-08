@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="com.elemental.atantat">
+        xmlns:tools="http://schemas.android.com/tools"
+        package="com.elemental.atantat">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
             android:name=".AtantatApplication"
@@ -15,6 +15,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ui.Activity.NotiActivity"></activity>
         <activity
                 android:name=".ui.Activity.ProfileActivity"
                 android:label="@string/title_activity_profile"
@@ -22,9 +23,8 @@
                 android:theme="@style/AppTheme.ProfileTheme">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.elemental.atantat.ui.Activity.MainActivity"/>
+                    android:value="com.elemental.atantat.ui.Activity.MainActivity" />
         </activity>
-
         <activity
                 android:name=".ui.Activity.SettingsActivity"
                 android:label="@string/title_activity_settings"
@@ -32,25 +32,23 @@
                 android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.elemental.atantat.ui.Activity.MainActivity"/>
+                    android:value="com.elemental.atantat.ui.Activity.MainActivity" />
         </activity>
-        <activity android:name=".ui.Activity.LoginRegisterActivity">
-        </activity>
+        <activity android:name=".ui.Activity.LoginRegisterActivity"></activity>
         <activity android:name=".ui.Activity.SplashActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.Activity.MainActivity">
-        </activity>
+        <activity android:name=".ui.Activity.MainActivity"></activity>
 
-        <receiver android:name=".utils.broadcastReceiver.NotiReceiver"/>
+        <receiver android:name=".utils.broadcastReceiver.NotiReceiver" />
         <receiver android:name=".utils.broadcastReceiver.InternetReceiver">
             <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-                <action android:name="android.net.wifi.WIFI_STATE_CHANGED"/>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
             </intent-filter>
         </receiver>
     </application>

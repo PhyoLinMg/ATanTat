@@ -13,12 +13,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:progress="100"/>
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/periodcycler"
+        <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/periodcycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-        </androidx.recyclerview.widget.RecyclerView>
+            </androidx.recyclerview.widget.RecyclerView>
+        </ScrollView>
     </RelativeLayout>
 
 </FrameLayout>

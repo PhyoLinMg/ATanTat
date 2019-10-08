@@ -3,11 +3,14 @@ package com.elemental.atantat.utils.broadcastReceiver
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import com.elemental.atantat.data.models.Times
 import com.elemental.atantat.db.AtanTatDatabase
 import com.elemental.atantat.db.dao.PeriodDao
+import com.elemental.atantat.ui.Activity.NotiActivity
 import com.elemental.atantat.utils.Calculations
 import org.jetbrains.anko.doAsync
 import java.util.*
@@ -29,7 +32,11 @@ class NotiReceiver: BroadcastReceiver() {
                 val minute=array[1].toInt()
                 val hour=calculations.twentyfourhrformat(array)
                 if(phone_hour==hour && phone_min==minute){
-                    Log.d("same","same here")
+                    val bundle:Bundle=Bundle()
+
+                    val intent=Intent(context,NotiActivity::class.java)
+
+                    startActivity(context,intent,null)
                 }
             }
         }

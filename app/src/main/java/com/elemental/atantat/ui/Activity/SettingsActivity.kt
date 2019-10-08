@@ -20,11 +20,6 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
 import com.elemental.atantat.utils.broadcastReceiver.NotiReceiver
 
-
-
-
-
-
 class SettingsActivity : AppCompatActivity() {
 
     private lateinit var sharedPreference: SharedPreference
