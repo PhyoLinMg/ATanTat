@@ -35,7 +35,7 @@ class NotiReceiver: BroadcastReceiver() {
                     val bundle:Bundle=Bundle()
 
                     val intent=Intent(context,NotiActivity::class.java)
-
+                    intent.putExtra("subjectId",time.subjectID)
                     startActivity(context,intent,null)
                 }
             }

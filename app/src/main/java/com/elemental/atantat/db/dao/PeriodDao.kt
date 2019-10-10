@@ -12,8 +12,10 @@ interface PeriodDao {
     @Query("SELECT * from periods")
     fun periods():List<Period>
 
-    @Query("SELECT startTime,endTime from periods")
+    @Query("SELECT startTime,endTime,subjectId from periods")
     fun times():List<Times>
+
+
 
 
     @Query("DELETE FROM periods")
