@@ -6,9 +6,9 @@
         android:layout_height="match_parent"
         tools:context=".ui.Fragment.MajorFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/major_recycler"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Welcome from Majors"/>
+            android:layout_height="wrap_content"/>
 
 </FrameLayout>

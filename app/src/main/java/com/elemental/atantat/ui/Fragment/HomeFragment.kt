@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.elemental.atantat.R
@@ -53,7 +54,7 @@ class HomeFragment : Fragment() ,KodeinAware{
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         Log.d("created","Home Created")
-        viewModel = ViewModelProviders.of(this,viewModelFactory).get(HomeViewModel::class.java)
+        viewModel = ViewModelProvider(this,viewModelFactory).get(HomeViewModel::class.java)
         periodAdapter= PeriodAdapter(periods,context!!)
         periodcycler.apply {
             layoutManager = LinearLayoutManager(context)

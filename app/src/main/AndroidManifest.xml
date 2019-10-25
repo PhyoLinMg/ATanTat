@@ -34,7 +34,11 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="com.elemental.atantat.ui.Activity.MainActivity" />
         </activity>
-        <activity android:name=".ui.Activity.LoginRegisterActivity"></activity>
+        <activity
+                android:name=".ui.Activity.LoginRegisterActivity"
+                android:label="Sign Up"
+                >
+        </activity>
         <activity android:name=".ui.Activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
