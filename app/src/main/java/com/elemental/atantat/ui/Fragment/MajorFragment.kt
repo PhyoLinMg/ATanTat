@@ -72,12 +72,12 @@ class MajorFragment : Fragment(), KodeinAware {
             .format("{%Value}")
 
         cartesian.animation(true)
-        cartesian.title("Your Roll Call Number")
+        cartesian.title("Your Roll Call Graph")
 
         cartesian.yScale().minimum(0.0)
         cartesian.yScale().maximum(100)
 
-        cartesian.yAxis(0).labels().format("{%Value}")
+        cartesian.yAxis(0).labels().format("{%Value}%")
 
         cartesian.tooltip().positionMode(TooltipPositionMode.POINT)
         cartesian.interactivity().hoverMode(HoverMode.BY_X)
