@@ -28,11 +28,11 @@ class PeriodAdapter (private val periods: List<Period>, val context: Context): R
     }
 
     inner class PeriodViewHolder(itemView: View): RecyclerView.ViewHolder(itemView),View.OnClickListener {
-        val btnYes=itemView.findViewById<Button>(R.id.btnyes)
-        val btnNo=itemView.findViewById<Button>(R.id.btnno)
-        val periodName=itemView.findViewById<TextView>(R.id.periodName)
-        val start=itemView.findViewById<TextView>(R.id.start)
-        val end=itemView.findViewById<TextView>(R.id.end)
+        private val btnYes=itemView.findViewById<Button>(R.id.btnyes)
+        private val btnNo=itemView.findViewById<Button>(R.id.btnno)
+        private val periodName=itemView.findViewById<TextView>(R.id.periodName)
+        private val start=itemView.findViewById<TextView>(R.id.start)
+        private val end=itemView.findViewById<TextView>(R.id.end)
 
         override fun onClick(view: View?) {
             if(view?.id==btnYes.id){

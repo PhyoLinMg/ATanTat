@@ -15,7 +15,15 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.Activity.NotiActivity"></activity>
+        <activity
+                android:name=".ui.Activity.SettingsActivity2"
+                android:label="Setting"
+                android:parentActivityName=".ui.Activity.MainActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.elemental.atantat.ui.Activity.MainActivity" />
+        </activity>
+        <activity android:name=".ui.Activity.NotiActivity" />
         <activity
                 android:name=".ui.Activity.ProfileActivity"
                 android:label="@string/title_activity_profile"
@@ -36,8 +44,8 @@
         </activity>
         <activity
                 android:name=".ui.Activity.LoginRegisterActivity"
-                android:label="Sign Up"
-                >
+                android:label="Sign Up">
+
         </activity>
         <activity android:name=".ui.Activity.SplashActivity">
             <intent-filter>
@@ -46,7 +54,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.Activity.MainActivity"></activity>
+        <activity android:name=".ui.Activity.MainActivity" />
 
         <receiver android:name=".utils.broadcastReceiver.NotiReceiver" />
         <receiver android:name=".utils.broadcastReceiver.InternetReceiver">

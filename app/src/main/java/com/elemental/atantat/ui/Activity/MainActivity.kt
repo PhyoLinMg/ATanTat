@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
         val adapter = ViewPagerAdapter(supportFragmentManager)
         adapter.addFragment(HomeFragment(), "Home")
         adapter.addFragment(SubjectFragment(), "Subjects")
-        adapter.addFragment(MajorFragment(), "Majors")
+        adapter.addFragment(MajorFragment(), "Graph")
         viewPager.adapter = adapter
         tabs.setupWithViewPager(viewPager)
     }
