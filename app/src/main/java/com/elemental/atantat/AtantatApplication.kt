@@ -6,6 +6,8 @@ import com.elemental.atantat.network.ConnectivityInterceptorImpl
 import com.elemental.atantat.network.services.MainService
 import com.elemental.atantat.network.services.PublicService
 import com.elemental.atantat.network.services.UserLoginSignUpInterface
+import com.elemental.atantat.repository.graphRepository.GraphRepository
+import com.elemental.atantat.repository.graphRepository.GraphRepositoryImpl
 import com.elemental.atantat.repository.loginRepo.LoginRepository
 import com.elemental.atantat.repository.loginRepo.LoginRepositoryImpl
 import com.elemental.atantat.repository.majorRepo.MajorRepository
@@ -20,6 +22,7 @@ import com.elemental.atantat.repository.universityRepo.UniversityRepository
 import com.elemental.atantat.repository.universityRepo.UniversityRepositoryImpl
 import com.elemental.atantat.repository.userRepo.UserRepository
 import com.elemental.atantat.repository.userRepo.UserRepositoryImpl
+import com.elemental.atantat.viewmodel.GraphViewModel.GraphViewModelFactory
 import com.elemental.atantat.viewmodel.HomeViewModel.HomeViewModelFactory
 import com.elemental.atantat.viewmodel.LoginViewModel.LoginViewModelFactory
 import com.elemental.atantat.viewmodel.MajorViewModel.MajorViewModelFactory
@@ -55,6 +58,7 @@ class AtantatApplication: Application(),KodeinAware {
         bind() from provider {SignUpViewModelFactory(instance())}
         bind() from provider{ UniversityViewModelFactory(instance()) }
         bind() from provider{MajorViewModelFactory(instance())}
+        bind() from provider { GraphViewModelFactory(instance())}
         bind() from provider {SubjectViewModelFactory(instance())}
         bind() from provider { ProfileViewModelFactory(instance()) }
 
@@ -65,6 +69,7 @@ class AtantatApplication: Application(),KodeinAware {
         bind<MajorRepository>() with singleton { MajorRepositoryImpl(instance()) }
         bind<SubjectRepository>() with singleton { SubjectRepositoryImpl(instance()) }
         bind<UserRepository>() with singleton{ UserRepositoryImpl(instance()) }
+        bind<GraphRepository>() with singleton { GraphRepositoryImpl(instance()) }
     }
     override fun onCreate() {
         super.onCreate()

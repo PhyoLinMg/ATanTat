@@ -67,8 +67,5 @@ class SubjectRepositoryImpl(val context:Context) : SubjectRepository,CoroutineSc
     override fun cancelJob() {
         mJob.cancel()
     }
-    private fun load(){
-        subjects.postValue(db.SubjectDao().subjects())
-        dataLoadState.postValue(DataLoadState.LOADED)
-    }
+
 }

@@ -65,11 +65,11 @@ class SubjectFragment : Fragment(),KodeinAware {
         }
         subjectviewModel.loadSubjects()
 
-        subjectviewModel.getSubjects().observe(this, Observer {
+        subjectviewModel.getSubjects().observe(viewLifecycleOwner, Observer {
             subjects.addAll(it)
             subjectAdapter.notifyDataSetChanged()
         })
-
+        Log.d("sub",subjects.toString())
 
         refresh.setOnRefreshListener {
             subjects.clear()
@@ -108,8 +108,6 @@ class SubjectFragment : Fragment(),KodeinAware {
     override fun onPause() {
         super.onPause()
         Log.d("paused","fragment paused")
-
-
 
     }
 
