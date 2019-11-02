@@ -1,5 +1,6 @@
 package com.elemental.atantat.ui.Activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -26,6 +27,7 @@ class ProfileActivity : AppCompatActivity(), KodeinAware{
     override val kodein by kodein()
     private lateinit var profileViewModel:ProfileViewModel
 
+
     private val profileViewModelFactory:ProfileViewModelFactory by instance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +51,12 @@ class ProfileActivity : AppCompatActivity(), KodeinAware{
             profile_uni.text=profileViewModel.getUser().value!!.university
             Log.d("profile",profileViewModel.getUser().value.toString())
         })
-
+        val sharedPreference= SharedPreference(this)
+        logout.setOnClickListener {
+            sharedPreference.clearSharedPreference()
+            val intent= Intent(this,LoginRegisterActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 

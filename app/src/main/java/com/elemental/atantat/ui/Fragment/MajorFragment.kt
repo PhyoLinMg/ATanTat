@@ -23,11 +23,8 @@ import com.anychart.enums.HoverMode
 import com.anychart.enums.TooltipPositionMode
 import com.anychart.enums.Anchor
 import com.anychart.enums.Position
-import com.elemental.atantat.data.models.Subject
 import com.elemental.atantat.db.AtanTatDatabase
 import com.elemental.atantat.utils.Calculations
-import com.elemental.atantat.viewmodel.GraphViewModel.GraphViewModel
-import com.elemental.atantat.viewmodel.GraphViewModel.GraphViewModelFactory
 import com.elemental.atantat.viewmodel.SubjectViewModel.SubjectViewModel
 import com.elemental.atantat.viewmodel.SubjectViewModel.SubjectViewModelFactory
 import org.jetbrains.anko.doAsync
@@ -54,7 +51,7 @@ class MajorFragment : Fragment(), KodeinAware {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this,subjectViewModelFactory).get(SubjectViewModel::class.java)
+        //viewModel = ViewModelProvider(this,subjectViewModelFactory).get(SubjectViewModel::class.java)
         // TODO: Use the ViewModel
 
         val db:AtanTatDatabase=AtanTatDatabase(context!!)

@@ -68,11 +68,13 @@
                     <View
                             android:layout_alignParentTop="true"
                             android:layout_width="match_parent"
-                            android:layout_height="30dp"
+                            android:layout_height="25dp"
                             android:background="@drawable/profile_bk"/>
 
                     <TextView
-                            android:text="Back to\nHome"
+                            android:id="@+id/logout"
+                            android:text="Logout"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large"
                             style="@style/profileStyledBackButton" />
                 </RelativeLayout>
 
