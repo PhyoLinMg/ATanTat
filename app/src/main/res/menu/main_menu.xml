@@ -2,25 +2,38 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-            android:id="@+id/action_profile"
-            android:icon="@drawable/ic_account_circle_black"
-            android:title="Profile"
-            app:showAsAction="always"
+            android:id="@+id/action_more"
+            android:icon="@drawable/ic_more_vert_white_24dp"
+            android:title=""
+            app:showAsAction="always">
+        <menu>
+            <item
+                    android:id="@+id/action_profile"
+                    android:icon="@drawable/ic_account_circle_black"
+                    android:title="Profile"
+                    app:showAsAction="ifRoom" />
+            <item
+                    android:id="@+id/action_setting"
+                    android:icon="@drawable/ic_settings_black"
+                    android:title="Setting"
+                    app:showAsAction="ifRoom"
 
-    />
-    <item
-            android:id="@+id/action_setting"
-            android:icon="@drawable/ic_settings_black"
-            android:title="Setting"
-            app:showAsAction="always"
+                    />
+            <item
+                    android:id="@+id/synchronise"
+                    android:icon="@drawable/ic_sync_black"
+                    android:title="Sync"
+                    app:showAsAction="ifRoom"/>
+            <item
+                    android:id="@+id/notification"
+                    android:icon="@drawable/ic_notification"
+                    android:title="Notification"
+                    app:showAsAction="ifRoom"
+                />
+        </menu>
+    </item>
 
-    />
-    <item
-            android:id="@+id/synchronise"
-            android:icon="@drawable/ic_sync_black"
-            android:title="Sync"
-            app:showAsAction="ifRoom
-"
 
-        />
+
+
 </menu>

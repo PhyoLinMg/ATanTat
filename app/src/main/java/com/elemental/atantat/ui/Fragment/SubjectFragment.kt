@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
@@ -54,7 +55,7 @@ class SubjectFragment : Fragment(),KodeinAware {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         Log.d("created","subject created")
-        subjectviewModel = ViewModelProviders.of(this,subjectViewModelFactory).get(SubjectViewModel::class.java)
+        subjectviewModel = ViewModelProvider(this,subjectViewModelFactory).get(SubjectViewModel::class.java)
         refresh.setColorSchemeColors(Color.BLUE, Color.CYAN, Color.RED)
         subjectAdapter= SubjectAdapter(subjects)
         val db:AtanTatDatabase= AtanTatDatabase.invoke(context!!)
@@ -81,7 +82,7 @@ class SubjectFragment : Fragment(),KodeinAware {
         }
 
 
-        subjectviewModel.getDataLoadState().observe(this, Observer {
+        subjectviewModel.getDataLoadState().observe(viewLifecycleOwner, Observer {
             when(it) {
                 DataLoadState.LOADING -> {
 //                    determinateBar.visibility = View.VISIBLE

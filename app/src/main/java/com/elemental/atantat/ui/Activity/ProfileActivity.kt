@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.elemental.atantat.R
 import com.elemental.atantat.utils.SharedPreference
 import com.elemental.atantat.viewmodel.ProfileViewModel.ProfileViewModel
@@ -36,7 +35,7 @@ class ProfileActivity : AppCompatActivity(), KodeinAware{
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        profileViewModel = ViewModelProviders.of(this, profileViewModelFactory).get(
+        profileViewModel = ViewModelProvider(this, profileViewModelFactory).get(
             ProfileViewModel::class.java)
 
         profileViewModel.loadUser()

@@ -20,6 +20,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.Observer
+import com.elemental.atantat.NotificationActivity
 import com.elemental.atantat.data.models.YesNo
 import com.elemental.atantat.db.AtanTatDatabase
 import com.elemental.atantat.network.ConnectivityInterceptorImpl
@@ -103,6 +104,11 @@ class MainActivity : AppCompatActivity() {
         R.id.action_setting -> {
             val setting = Intent(this@MainActivity, SettingsActivity::class.java)
             startActivity(setting)
+            true
+        }
+        R.id.notification ->{
+            val notification=Intent(this@MainActivity,NotificationActivity::class.java)
+            startActivity(notification)
             true
         }
         R.id.synchronise->{
