@@ -12,7 +12,6 @@ import com.elemental.atantat.adapter.NotiAdapter
 import com.elemental.atantat.data.models.Subject
 import com.elemental.atantat.viewmodel.SubjectViewModel.SubjectViewModel
 import com.elemental.atantat.viewmodel.SubjectViewModel.SubjectViewModelFactory
-
 import kotlinx.android.synthetic.main.activity_notification.*
 import kotlinx.android.synthetic.main.content_notification.*
 import org.kodein.di.KodeinAware
