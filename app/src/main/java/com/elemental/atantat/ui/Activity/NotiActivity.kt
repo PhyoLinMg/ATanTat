@@ -31,6 +31,7 @@ class NotiActivity : AppCompatActivity() {
             finish()
         }
         btncancel.setOnClickListener{
+            finish()
         }
 
     }

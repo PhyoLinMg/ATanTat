@@ -1,12 +1,15 @@
 package com.elemental.atantat.ui.Fragment
 
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.elemental.atantat.R
@@ -54,9 +57,13 @@ class MajorFragment : Fragment(), KodeinAware {
         //viewModel = ViewModelProvider(this,subjectViewModelFactory).get(SubjectViewModel::class.java)
         // TODO: Use the ViewModel
 
-        val db:AtanTatDatabase=AtanTatDatabase(context!!)
+        val db=AtanTatDatabase(context!!)
         val anyChartView = any_chart_view
         anyChartView.setProgressBar(progress_bar)
+
+//        val colorDrawable=ColorDrawable(ContextCompat.getColor(context!!,R.color.black))
+//        anyChartView.setBackgroundColor(resources.getColor(R.color.black))
+
         val cartesian:Cartesian = AnyChart.column()
 
 
@@ -78,7 +85,7 @@ class MajorFragment : Fragment(), KodeinAware {
             .anchor(Anchor.CENTER_BOTTOM)
             .offsetX(0.0)
             .offsetY(5.0)
-            .format("{%Value}")
+            .format("{%Value}%")
 
         cartesian.animation(true)
         cartesian.title("Your Roll Call Number")
@@ -86,13 +93,14 @@ class MajorFragment : Fragment(), KodeinAware {
         cartesian.yScale().minimum(0.0)
         cartesian.yScale().maximum(100)
 
-        cartesian.yAxis(0).labels().format("{%Value}")
+        cartesian.yAxis(0).labels().format("{%Value}%")
 
         cartesian.tooltip().positionMode(TooltipPositionMode.POINT)
         cartesian.interactivity().hoverMode(HoverMode.BY_X)
 
         cartesian.xAxis(0).title("Major")
         cartesian.yAxis(0).title("Roll Call Percentage")
+
 
         anyChartView.setChart(cartesian)
 

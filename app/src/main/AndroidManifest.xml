@@ -16,7 +16,7 @@
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
         <activity
-                android:name=".NotificationActivity"
+                android:name=".ui.Activity.NotificationActivity"
                 android:label="@string/title_activity_notification"
                 android:parentActivityName=".ui.Activity.MainActivity"
                 android:theme="@style/AppTheme.NoActionBar">
@@ -24,12 +24,14 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="com.elemental.atantat.ui.Activity.MainActivity" />
         </activity>
-        <activity android:name=".ui.Activity.NotiActivity" />
+        <activity android:name=".ui.Activity.NotiActivity" >
+
+        </activity>
         <activity
                 android:name=".ui.Activity.ProfileActivity"
                 android:label="@string/title_activity_profile"
                 android:parentActivityName=".ui.Activity.MainActivity"
-                android:theme="@style/AppTheme.ProfileTheme">
+                >
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="com.elemental.atantat.ui.Activity.MainActivity" />
@@ -45,7 +47,9 @@
         </activity>
         <activity
                 android:name=".ui.Activity.LoginRegisterActivity"
-                android:label="Sign Up"></activity>
+                android:label="Sign Up">
+
+        </activity>
         <activity android:name=".ui.Activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

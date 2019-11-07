@@ -25,6 +25,7 @@ class ProfileActivity : AppCompatActivity(), KodeinAware{
 
     override val kodein by kodein()
     private lateinit var profileViewModel:ProfileViewModel
+    private lateinit var sharedPreference: SharedPreference
 
 
     private val profileViewModelFactory:ProfileViewModelFactory by instance()
@@ -50,7 +51,8 @@ class ProfileActivity : AppCompatActivity(), KodeinAware{
             profile_uni.text=profileViewModel.getUser().value!!.university
             Log.d("profile",profileViewModel.getUser().value.toString())
         })
-        val sharedPreference= SharedPreference(this)
+        sharedPreference= SharedPreference(this)
+        //changecolor()
         logout.setOnClickListener {
             sharedPreference.clearSharedPreference()
             val intent= Intent(this,LoginRegisterActivity::class.java)
@@ -58,7 +60,17 @@ class ProfileActivity : AppCompatActivity(), KodeinAware{
         }
 
     }
+    private fun changecolor() {
+        val color = sharedPreference.getValueString("color")
+        if(color=="black"){
+            delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
 
+        }
+        else{
+            delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
+        }
+
+    }
     override fun onDestroy() {
         super.onDestroy()
         profileViewModel.cancelJob()

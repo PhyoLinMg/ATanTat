@@ -16,17 +16,13 @@ import kotlinx.android.synthetic.main.activity_main.*
 import android.content.BroadcastReceiver
 import android.content.IntentFilter
 import android.net.ConnectivityManager
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.lifecycle.Observer
-import com.elemental.atantat.NotificationActivity
 import com.elemental.atantat.data.models.YesNo
 import com.elemental.atantat.db.AtanTatDatabase
 import com.elemental.atantat.network.ConnectivityInterceptorImpl
 import com.elemental.atantat.network.services.MainService
 import com.elemental.atantat.usecases.PostAttendanceUseCase
-import com.elemental.atantat.utils.DataLoadState
 import com.elemental.atantat.utils.NetworkUtil
 import com.elemental.atantat.utils.broadcastReceiver.InternetReceiver
 import org.jetbrains.anko.doAsync
@@ -107,7 +103,8 @@ class MainActivity : AppCompatActivity() {
             true
         }
         R.id.notification ->{
-            val notification=Intent(this@MainActivity,NotificationActivity::class.java)
+            val notification=Intent(this@MainActivity,
+                NotificationActivity::class.java)
             startActivity(notification)
             true
         }

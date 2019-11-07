@@ -1,4 +1,4 @@
-package com.elemental.atantat
+package com.elemental.atantat.ui.Activity
 
 import android.content.DialogInterface
 import android.os.Bundle
@@ -18,6 +18,7 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
 import androidx.appcompat.app.AlertDialog
+import com.elemental.atantat.R
 
 
 class NotificationActivity : AppCompatActivity(),NotiAdapter.OnItemClickedListener , KodeinAware {
@@ -33,7 +34,7 @@ class NotificationActivity : AppCompatActivity(),NotiAdapter.OnItemClickedListen
         builder.setMessage("Total Time:${subject.yes+subject.no} \n Your attended time:${subject.yes}")
             .setCancelable(false)
             .setPositiveButton("OK", DialogInterface.OnClickListener {
-                dialog, id -> dialog.cancel()
+                dialog, _ -> dialog.cancel()
         })
         val alertDialog=builder.create()
         alertDialog.setTitle(subject.name)
