@@ -30,6 +30,12 @@
                     android:title="Notification"
                     app:showAsAction="ifRoom"
                 />
+            <item
+                    android:id="@+id/graph"
+                    android:icon="@drawable/ic_point"
+                    android:title="Graph"
+                    app:showAsAction="ifRoom"
+                    />
         </menu>
     </item>
 

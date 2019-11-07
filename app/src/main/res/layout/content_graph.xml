@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-        android:id="@+id/layout"
-
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
+        android:orientation="horizontal"
         android:layout_height="match_parent"
-        tools:context=".ui.Fragment.MajorFragment">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".ui.Activity.GraphActivity"
+        tools:showIn="@layout/activity_graph">
 
     <com.anychart.AnyChartView
             android:background="@color/black"
@@ -25,5 +25,4 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />
-
-</FrameLayout>
+</LinearLayout>

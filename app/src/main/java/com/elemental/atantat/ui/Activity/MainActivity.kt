@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import com.elemental.atantat.R
 import com.elemental.atantat.adapter.ViewPagerAdapter
 import com.elemental.atantat.ui.Fragment.HomeFragment
-import com.elemental.atantat.ui.Fragment.MajorFragment
 import com.elemental.atantat.ui.Fragment.SubjectFragment
 import com.elemental.atantat.utils.SharedPreference
 import kotlinx.android.synthetic.main.activity_main.*
@@ -66,7 +65,6 @@ class MainActivity : AppCompatActivity() {
         val adapter = ViewPagerAdapter(supportFragmentManager)
         adapter.addFragment(HomeFragment(), "Home")
         adapter.addFragment(SubjectFragment(), "Subjects")
-        adapter.addFragment(MajorFragment(), "Graph")
         viewPager.adapter = adapter
         tabs.setupWithViewPager(viewPager)
     }
@@ -106,6 +104,11 @@ class MainActivity : AppCompatActivity() {
             val notification=Intent(this@MainActivity,
                 NotificationActivity::class.java)
             startActivity(notification)
+            true
+        }
+        R.id.graph ->{
+            val graph=Intent(this@MainActivity,GraphActivity::class.java)
+            startActivity(graph)
             true
         }
         R.id.synchronise->{

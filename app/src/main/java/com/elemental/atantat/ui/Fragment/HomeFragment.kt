@@ -64,14 +64,14 @@ class HomeFragment : Fragment() ,KodeinAware{
 
         if (periods != null && periods.isEmpty()) {
             viewModel.loadPeriods()
-            viewModel.getPeriods().observe(this,Observer{
+            viewModel.getPeriods().observe(viewLifecycleOwner,Observer{
                 periods.addAll(it)
                 periodAdapter.notifyDataSetChanged()
             })
         }
 
 
-        viewModel.getLoadState().observe(this, Observer {
+        viewModel.getLoadState().observe(viewLifecycleOwner, Observer {
             when(it) {
                 DataLoadState.LOADING -> {
                     determinateBar.visibility = View.VISIBLE
