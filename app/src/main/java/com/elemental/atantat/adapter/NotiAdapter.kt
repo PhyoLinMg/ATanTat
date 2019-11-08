@@ -11,7 +11,7 @@ import com.elemental.atantat.utils.inflate
 import kotlinx.android.synthetic.main.noti_card.view.*
 
 
-class NotiAdapter(val subjects:List<Subject>,val listener:OnItemClickedListener): RecyclerView.Adapter<NotiAdapter.NotiViewHolder>() {
+class NotiAdapter(val subjects:List<Subject>, private val listener:OnItemClickedListener): RecyclerView.Adapter<NotiAdapter.NotiViewHolder>() {
     private val calculations=Calculations()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotiViewHolder {
         return NotiViewHolder(parent.inflate(R.layout.noti_card))

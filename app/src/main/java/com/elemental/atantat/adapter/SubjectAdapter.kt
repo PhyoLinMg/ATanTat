@@ -12,9 +12,12 @@ import com.elemental.atantat.utils.Calculations
 import com.elemental.atantat.utils.inflate
 
 
-class SubjectAdapter(val subjects:List<Subject>): RecyclerView.Adapter<SubjectAdapter.SubjectViewHolder>() {
+class SubjectAdapter(val subjects:List<Subject>, private val listener:OnItemClickedListener): RecyclerView.Adapter<SubjectAdapter.SubjectViewHolder>() {
     private val calculations:Calculations= Calculations()
 
+    interface OnItemClickedListener {
+        fun onItemClicked(subject: Subject)
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubjectViewHolder {
         return SubjectViewHolder(parent.inflate(R.layout.subject_card))
     }
@@ -23,17 +26,20 @@ class SubjectAdapter(val subjects:List<Subject>): RecyclerView.Adapter<SubjectAd
 
     override fun onBindViewHolder(holder: SubjectViewHolder, position: Int) {
         val subject=subjects[position]
-        holder.bind(subject)
+        holder.bind(subject,listener)
     }
 
     inner class SubjectViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        val name=itemView.findViewById<TextView>(R.id.name)
+        val name=itemView.findViewById<TextView>(R.id.name)!!
 
-        val txtpercentage=itemView.findViewById<TextView>(R.id.txt_percentage)
+        private val txtpercentage=itemView.findViewById<TextView>(R.id.txt_percentage)!!
 
-        fun bind(subject:Subject){
+        fun bind(subject:Subject,listener:OnItemClickedListener){
             val percentage=calculations.calculatePercentage(subject.yes,subject.no)
             name.text=subject.name
+            itemView.setOnClickListener {
+                listener.onItemClicked(subject)
+            }
             txtpercentage.text=percentage.toString()+"%"
             if(percentage>=75)
                 txtpercentage.setTextColor(Color.GREEN)

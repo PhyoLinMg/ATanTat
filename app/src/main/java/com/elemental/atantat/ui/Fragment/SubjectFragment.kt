@@ -1,5 +1,6 @@
 package com.elemental.atantat.ui.Fragment
 
+import android.content.DialogInterface
 import android.graphics.Color
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -9,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,7 +31,20 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 
-class SubjectFragment : Fragment(),KodeinAware {
+class SubjectFragment : Fragment(),KodeinAware,SubjectAdapter.OnItemClickedListener {
+    override fun onItemClicked(subject: Subject) {
+        val builder = AlertDialog.Builder(context!!)
+        builder.setTitle(subject.name)
+        builder.setMessage("Total Time:${subject.yes+subject.no} \n Your attended time:${subject.yes}")
+            .setCancelable(false)
+            .setPositiveButton("OK", DialogInterface.OnClickListener {
+                    dialog, _ -> dialog.cancel()
+            })
+        val alertDialog=builder.create()
+        alertDialog.setTitle(subject.name)
+        alertDialog.show()
+    }
+
     override val kodein by kodein()
     private val subjectViewModelFactory:SubjectViewModelFactory by instance()
     private lateinit var subjectAdapter: SubjectAdapter
@@ -57,7 +72,7 @@ class SubjectFragment : Fragment(),KodeinAware {
         Log.d("created","subject created")
         subjectviewModel = ViewModelProvider(this,subjectViewModelFactory).get(SubjectViewModel::class.java)
         refresh.setColorSchemeColors(Color.BLUE, Color.CYAN, Color.RED)
-        subjectAdapter= SubjectAdapter(subjects)
+        subjectAdapter= SubjectAdapter(subjects,this)
         val db:AtanTatDatabase= AtanTatDatabase.invoke(context!!)
         sub_recycler.apply {
             layoutManager = LinearLayoutManager(context)
