@@ -1,6 +1,7 @@
 package com.elemental.atantat.network.services
 
 import com.elemental.atantat.data.models.Periods
+import com.elemental.atantat.data.models.Profile
 import com.elemental.atantat.data.models.Subjects
 import com.elemental.atantat.data.models.YesNo
 import com.elemental.atantat.data.responses.AttendanceResponse
@@ -28,10 +29,8 @@ interface MainService{
     @POST("attendances")
     fun postattendancesAsync(@Body yesNo: YesNo): Deferred<Response<AttendanceResponse>>
 
-
-
     @GET("user")
-    fun getUserAsync():Deferred<Response<ProfileResponse>>
+    fun getUserAsync():Deferred<Response<Profile>>
 
     companion object {
        operator fun invoke(

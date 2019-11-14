@@ -14,9 +14,8 @@ import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 
-
-import androidx.lifecycle.ViewModelProviders
 
 import com.elemental.atantat.R
 import com.elemental.atantat.data.models.Major
@@ -89,11 +88,11 @@ class LoginFragment : Fragment(),KodeinAware {
         sharedPreference= SharedPreference(context)
         determinateBar.visibility = View.INVISIBLE
 
-        loginViewModel = ViewModelProviders.of(this, loginviewModelFactory).get(
+        loginViewModel = ViewModelProvider(this, loginviewModelFactory).get(
             LoginViewModel::class.java)
-        universityViewModel=ViewModelProviders.of(this,universityViewModelFactory)
+        universityViewModel=ViewModelProvider(this,universityViewModelFactory)
             .get(UniversityViewModel::class.java)
-        majorViewModel=ViewModelProviders.of(this,majorViewModelFactory)
+        majorViewModel=ViewModelProvider(this,majorViewModelFactory)
             .get(MajorViewModel::class.java)
 
 

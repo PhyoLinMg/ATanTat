@@ -2,6 +2,7 @@ package com.elemental.atantat.viewmodel.ProfileViewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import com.elemental.atantat.data.models.Profile
 import com.elemental.atantat.data.responses.ProfileResponse
 import com.elemental.atantat.repository.userRepo.UserRepository
 import com.elemental.atantat.utils.DataLoadState
@@ -14,7 +15,7 @@ class ProfileViewModel(private val userRepository:UserRepository):ViewModel() {
         return userRepository.loadUser()
 
     }
-    fun getUser(): LiveData<ProfileResponse>{
+    fun getUser(): LiveData<Profile>{
         return userRepository.getUser()
     }
     fun cancelJob(){

@@ -5,7 +5,7 @@
                                                  android:layout_width="match_parent"
                                                  android:layout_height="match_parent"
                                                  android:fitsSystemWindows="true"
-                                                 tools:context="com.elemental.atantat.ui.Activity.ProfileActivity"
+
                                                  android:background="@color/profileBackground">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -15,70 +15,7 @@
             android:fitsSystemWindows="true"
             android:theme="@style/AppTheme.AppBarOverlay">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/toolbar_layout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fitsSystemWindows="true"
-                app:contentScrim="@color/profilePrimaryDark"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                app:toolbarId="@+id/toolbar"
-                app:expandedTitleMarginEnd="64dp"
-                app:expandedTitleMarginStart="48dp"
-                app:expandedTitleTextAppearance="@style/TransparentText">
 
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:id="@+id/linearLayout"
-                    android:background="@drawable/profile_bk">
-
-                <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/profile_round" />
-
-                <TextView
-                        android:id="@+id/header_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="\@appsnippuser"
-                        android:textSize="28dp"
-                        android:textStyle="bold"/>
-
-                <TextView
-                        android:id="@+id/header_email"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="developer@appsnipp.com"
-                        android:textSize="12dp"
-                        android:textStyle="bold"/>
-
-                <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:layout_gravity="bottom"
-                        android:layout_marginTop="20dp"
-                        android:background="@color/profileBackground">
-
-                    <View
-                            android:layout_alignParentTop="true"
-                            android:layout_width="match_parent"
-                            android:layout_height="25dp"
-                            android:background="@drawable/profile_bk"/>
-
-                    <TextView
-                            android:id="@+id/logout"
-                            android:text="Logout"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                            style="@style/profileStyledBackButton" />
-                </RelativeLayout>
-
-            </LinearLayout>
 
             <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
@@ -87,7 +24,7 @@
                     app:layout_collapseMode="pin"
                     app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_profile" />

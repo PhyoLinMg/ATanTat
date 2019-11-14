@@ -1,6 +1,7 @@
 package com.elemental.atantat.ui.Activity
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -15,7 +16,6 @@ import com.elemental.atantat.db.AtanTatDatabase
 import com.elemental.atantat.utils.SharedPreference
 import com.elemental.atantat.viewmodel.ProfileViewModel.ProfileViewModel
 import com.elemental.atantat.viewmodel.ProfileViewModel.ProfileViewModelFactory
-import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.content_profile.*
 import org.jetbrains.anko.doAsync
 import org.kodein.di.KodeinAware
@@ -47,9 +47,7 @@ class ProfileActivity : AppCompatActivity(), KodeinAware{
 
         profileViewModel.getUser().observe(this, Observer {
             profile_name.text=profileViewModel.getUser().value!!.name
-            header_name.text=profileViewModel.getUser().value!!.name
             profile_email.text=profileViewModel.getUser().value!!.email
-            header_email.text=profileViewModel.getUser().value!!.email
             profile_major.text=profileViewModel.getUser().value!!.major
             profile_uni.text=profileViewModel.getUser().value!!.university
             Log.d("profile",profileViewModel.getUser().value.toString())

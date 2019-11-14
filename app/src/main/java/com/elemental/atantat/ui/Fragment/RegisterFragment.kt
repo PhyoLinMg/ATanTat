@@ -11,14 +11,12 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 
 import com.elemental.atantat.R
 import com.elemental.atantat.data.models.Major
 import com.elemental.atantat.data.models.University
 
-import com.elemental.atantat.repository.signupRepo.SignUpRepositoryImpl
 import com.elemental.atantat.utils.DataLoadState
 import com.elemental.atantat.utils.SharedPreference
 import com.elemental.atantat.viewmodel.MajorViewModel.MajorViewModel
@@ -29,7 +27,6 @@ import com.elemental.atantat.viewmodel.SignUpViewModel.SignUpViewModelFactory
 import com.elemental.atantat.viewmodel.UniversityViewModel.UniversityViewModel
 import com.elemental.atantat.viewmodel.UniversityViewModel.UniversityViewModelFactory
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.fragment_login.*
 
 
 import kotlinx.android.synthetic.main.fragment_register.*
@@ -85,11 +82,11 @@ class RegisterFragment : Fragment(),KodeinAware {
         sharedPreference= SharedPreference(context)
 
         determinateBar.visibility = View.INVISIBLE
-        signupViewModel = ViewModelProviders.of(this, viewModelFactory).get(
+        signupViewModel = ViewModelProvider(this, viewModelFactory).get(
             SignUpViewModel::class.java)
-        universityViewModel=ViewModelProviders.of(this,universityViewModelFactory)
+        universityViewModel=ViewModelProvider(this,universityViewModelFactory)
             .get(UniversityViewModel::class.java)
-        majorViewModel=ViewModelProviders.of(this,majorViewModelFactory)
+        majorViewModel=ViewModelProvider(this,majorViewModelFactory)
             .get(MajorViewModel::class.java)
 
         universityViewModel.loadUniversities()
@@ -112,8 +109,8 @@ class RegisterFragment : Fragment(),KodeinAware {
 
                 }
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
-                    val uni_id=position+1
-                    uniID.postValue(uni_id)
+                    val uniId=position+1
+                    uniID.postValue(uniId)
 
                 }
 
@@ -137,8 +134,8 @@ class RegisterFragment : Fragment(),KodeinAware {
                 }
 
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
-                    val major_id=position+1
-                    majorID.postValue(major_id)
+                    val majorId=position+1
+                    majorID.postValue(majorId)
                 }
 
             }
