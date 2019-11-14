@@ -11,11 +11,13 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.elemental.atantat.R
+import com.elemental.atantat.db.AtanTatDatabase
 import com.elemental.atantat.utils.SharedPreference
 import com.elemental.atantat.viewmodel.ProfileViewModel.ProfileViewModel
 import com.elemental.atantat.viewmodel.ProfileViewModel.ProfileViewModelFactory
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.content_profile.*
+import org.jetbrains.anko.doAsync
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 
@@ -26,6 +28,7 @@ class ProfileActivity : AppCompatActivity(), KodeinAware{
     override val kodein by kodein()
     private lateinit var profileViewModel:ProfileViewModel
     private lateinit var sharedPreference: SharedPreference
+    private val db=AtanTatDatabase(this)
 
 
     private val profileViewModelFactory:ProfileViewModelFactory by instance()
@@ -52,9 +55,14 @@ class ProfileActivity : AppCompatActivity(), KodeinAware{
             Log.d("profile",profileViewModel.getUser().value.toString())
         })
         sharedPreference= SharedPreference(this)
-        //changecolor()
+        changecolor()
         logout.setOnClickListener {
             sharedPreference.clearSharedPreference()
+            doAsync {
+                db.SubjectDao().deleteTable()
+                db.PeriodDao().deleteTable()
+                db.MajorDao().deleteTable()
+            }
             val intent= Intent(this,LoginRegisterActivity::class.java)
             startActivity(intent)
         }
@@ -64,7 +72,6 @@ class ProfileActivity : AppCompatActivity(), KodeinAware{
         val color = sharedPreference.getValueString("color")
         if(color=="black"){
             delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
-
         }
         else{
             delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO

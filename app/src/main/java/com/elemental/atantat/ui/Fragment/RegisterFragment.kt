@@ -96,7 +96,7 @@ class RegisterFragment : Fragment(),KodeinAware {
 
         majorViewModel.loadMajors()
 
-        universityViewModel.getUniversities().observe(this, Observer {
+        universityViewModel.getUniversities().observe(viewLifecycleOwner, Observer {
             universities.addAll(it)
             val uniNames= arrayOfNulls<String>(universities.size)
             for (i in uniNames.indices){
@@ -121,7 +121,7 @@ class RegisterFragment : Fragment(),KodeinAware {
         })
 
 
-        majorViewModel.getMajors().observe(this, Observer {
+        majorViewModel.getMajors().observe(viewLifecycleOwner, Observer {
             majors.addAll(it)
             val majorNames= arrayOfNulls<String>(majors.size)
             for(i in majorNames.indices)
@@ -150,7 +150,7 @@ class RegisterFragment : Fragment(),KodeinAware {
         view!!.btn_signup.setOnClickListener {
             signupViewModel.signup(name.text.toString(),email.text.toString(),password.text.toString(),password_confirmation.text.toString(),uniID.value!!,majorID.value!!,activity)
         }
-        signupViewModel.getLoadState().observe(this, Observer {
+        signupViewModel.getLoadState().observe(viewLifecycleOwner, Observer {
             Log.d("signup",signupViewModel.getLoadState().value.toString())
             when(it) {
                 DataLoadState.LOADING -> {
@@ -180,7 +180,7 @@ class RegisterFragment : Fragment(),KodeinAware {
     }
 
     private fun loadStateUni(){
-        universityViewModel.getDataLoadState().observe(this, Observer {
+        universityViewModel.getDataLoadState().observe(viewLifecycleOwner, Observer {
             Log.d("unistate",universityViewModel.getDataLoadState().value.toString())
             when(it) {
                 DataLoadState.LOADING -> {
@@ -200,7 +200,7 @@ class RegisterFragment : Fragment(),KodeinAware {
         })
     }
     private fun loadStateMajor(){
-        majorViewModel.getDataLoadState().observe(this, Observer {
+        majorViewModel.getDataLoadState().observe(viewLifecycleOwner, Observer {
             Log.d("majorstate",majorViewModel.getDataLoadState().value.toString())
             when(it) {
                 DataLoadState.LOADING -> {

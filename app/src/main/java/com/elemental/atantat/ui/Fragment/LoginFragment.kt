@@ -101,7 +101,7 @@ class LoginFragment : Fragment(),KodeinAware {
 
         majorViewModel.loadMajors()
 
-        universityViewModel.getUniversities().observe(this, Observer {
+        universityViewModel.getUniversities().observe(viewLifecycleOwner, Observer {
             universities.addAll(it)
             val uniNames= arrayOfNulls<String>(universities.size)
             for (i in uniNames.indices){
@@ -126,7 +126,7 @@ class LoginFragment : Fragment(),KodeinAware {
         })
 
 
-        majorViewModel.getMajors().observe(this, Observer {
+        majorViewModel.getMajors().observe(viewLifecycleOwner, Observer {
             majors.addAll(it)
             val majorNames= arrayOfNulls<String>(majors.size)
             for(i in majorNames.indices)
@@ -154,7 +154,7 @@ class LoginFragment : Fragment(),KodeinAware {
 
 
 
-        loginViewModel.getLoadState().observe(this, Observer {
+        loginViewModel.getLoadState().observe(viewLifecycleOwner, Observer {
             when(it) {
                 DataLoadState.LOADING -> {
                     determinateBar.visibility = View.VISIBLE
@@ -187,7 +187,7 @@ class LoginFragment : Fragment(),KodeinAware {
         majorViewModel.cancelJob()
     }
     private fun loadStateUni(){
-        universityViewModel.getDataLoadState().observe(this, Observer {
+        universityViewModel.getDataLoadState().observe(viewLifecycleOwner, Observer {
             when(it) {
                 DataLoadState.LOADING -> {
                     determinateBar.visibility = View.VISIBLE
@@ -206,7 +206,7 @@ class LoginFragment : Fragment(),KodeinAware {
         })
     }
     private fun loadStateMajor(){
-        majorViewModel.getDataLoadState().observe(this, Observer {
+        majorViewModel.getDataLoadState().observe(viewLifecycleOwner, Observer {
             when(it) {
                 DataLoadState.LOADING -> {
                     determinateBar.visibility = View.VISIBLE
