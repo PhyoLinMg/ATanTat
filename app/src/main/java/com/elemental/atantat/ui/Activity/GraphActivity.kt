@@ -2,15 +2,12 @@ package com.elemental.atantat.ui.Activity
 
 import android.os.Bundle
 import android.util.Log
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.anychart.AnyChart
 import com.anychart.chart.common.dataentry.DataEntry
 import com.anychart.chart.common.dataentry.ValueDataEntry
-import com.anychart.charts.Cartesian
-import com.anychart.core.cartesian.series.Column
 import com.anychart.enums.Anchor
 import com.anychart.enums.HoverMode
 import com.anychart.enums.Position
@@ -19,8 +16,10 @@ import com.elemental.atantat.R
 import com.elemental.atantat.data.models.Subject
 import com.elemental.atantat.db.AtanTatDatabase
 import com.elemental.atantat.utils.Calculations
+import com.elemental.atantat.utils.getViewModel
 import com.elemental.atantat.viewmodel.SubjectViewModel.SubjectViewModel
 import com.elemental.atantat.viewmodel.SubjectViewModel.SubjectViewModelFactory
+import com.elemental.atantat.viewmodel.TestingViewModel.TestingViewModel
 
 import kotlinx.android.synthetic.main.activity_graph.*
 import kotlinx.android.synthetic.main.content_graph.*
@@ -35,12 +34,19 @@ class GraphActivity : AppCompatActivity(), KodeinAware {
     private val calculations= Calculations()
     private val subjects:MutableList<Subject> = ArrayList()
     private lateinit var subjectviewModel: SubjectViewModel
+
     private val db=AtanTatDatabase(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         subjectviewModel = ViewModelProvider(this,subjectViewModelFactory).get(SubjectViewModel::class.java)
         setContentView(R.layout.activity_graph)
         setSupportActionBar(toolbar)
+
+        val vm:TestingViewModel by lazy {
+            getViewModel{ TestingViewModel(this)}
+        }
+
+        Log.d("testingViewModel",vm.returnText())
         val anyChartView = any_chart_view
         anyChartView.setProgressBar(progress_bar)
         val data:MutableList<DataEntry> = ArrayList()
